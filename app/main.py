@@ -33,6 +33,7 @@ class Main:
             regions = selected_regions if selected_regions else None
         else:
             selected_regions = []  # Now defined even if file doesn't exist
+            unique_regions = []
             regions = None
 
         st.sidebar.subheader("Feature Layers")
