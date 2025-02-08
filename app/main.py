@@ -31,6 +31,7 @@ class Main:
             selected_regions = st.sidebar.multiselect("Select Regions", options=unique_regions, default=['North East'])
             regions = selected_regions if selected_regions else None
         else:
+            selected_regions = []  # Now defined even if file doesn't exist
             regions = None
 
         st.sidebar.subheader("Feature Layers")
