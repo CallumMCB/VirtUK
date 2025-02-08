@@ -37,6 +37,7 @@ class Main:
             selected_regions = st.sidebar.multiselect("Select Regions", options=unique_regions, default=['North East'])
             regions = selected_regions if selected_regions else None
         else:
+            print(self.regions_file, "not found.")
             regions = None  # Ensure `regions` is also always defined
 
         # --- Load and Process Data (cached) ---
@@ -73,7 +74,6 @@ class Main:
             st.session_state.last_area_clicked = None
 
         # --- Load and Process Data (cached) ---
-        data_loader = load_all_data(unique_regions, regions)
         self.msoa_op = MSOAOutput(self, data_loader)
         self.oa_op = OAOutput(self, data_loader)  # Make sure OAOutput is defined!
         self.care_op = CareOutput(self)

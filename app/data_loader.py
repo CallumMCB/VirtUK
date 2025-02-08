@@ -3,7 +3,6 @@
 import os
 import geopandas as gpd
 import pandas as pd
-import streamlit as st
 
 DATA_PATH = 'data_2021'  # Adjust as needed
 
@@ -159,10 +158,6 @@ class DataLoader:
 
     @staticmethod
     def drop_missing_coordinates(df, coordinate_columns):
-        if not isinstance(df, pd.DataFrame):
-            # Log a warning if needed
-            st.warning("Expected a DataFrame, but got {}. Returning an empty DataFrame.".format(type(df)))
-            return pd.DataFrame()
         return df.dropna(subset=coordinate_columns).reset_index(drop=True)
 
 
