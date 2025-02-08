@@ -8,6 +8,7 @@ from streamlit_folium import st_folium
 import altair as alt
 from pprint import pprint
 
+alt.renderers.set_embed_options(vegaLiteVersion="5")
 
 class OAOutput:
     def __init__(self, main_container, data):
@@ -37,7 +38,9 @@ class OAOutput:
         with tab:
             st.write("Other Data (Placeholder)")
             # Additional content for the 'Other' tab
-
+##########################################
+# CLASS: OA_Pop_summary (Population Summary)
+##########################################
 
 class OA_Pop_summary:
     @staticmethod
@@ -122,7 +125,7 @@ class OA_Pop_summary:
             # "Students" are the remainder (sum over all other accommodation types)
             student_counts = estimated_counts.drop('Does not apply').sum()
 
-            # --- Build a DataFrame for manual stacking (so we can use log scale) ---
+            # --- Build a DataFrame for manual stacking (for a layered bar chart) ---
             pop_df = pd.DataFrame({
                 'Age Band': five_year_bands,
                 'Students': [student_counts[band] for band in five_year_bands],
@@ -134,15 +137,15 @@ class OA_Pop_summary:
             pop_df['StudentsBottom'] = 0
             pop_df['StudentsTop'] = pop_df['Students']
 
-            # Set up a y-axis domain (using log scale) based on the maximum total count.
+            # Set up a y-axis domain with a fixed lower limit of 0.
             max_total = pop_df['Total'].max()
-            y_domain = [1, max_total * 1.1]
+            y_domain = [0, max_total * 1.1]
 
-            # --- Build the Altair charts ---
+            # --- Build the Altair charts (linear scales now) ---
             # Chart for Students (the lower, blue portion)
             chart_students = alt.Chart(pop_df).mark_bar(color='#1f77b4').encode(
                 x=alt.X('Age Band:N', sort=five_year_bands, title='5-Year Age Bands'),
-                y=alt.Y('StudentsTop:Q', scale=alt.Scale(type='log', domain=y_domain), title='Estimated Count'),
+                y=alt.Y('StudentsTop:Q', scale=alt.Scale(domain=y_domain), title='Estimated Count'),
                 y2=alt.Y2('StudentsBottom:Q'),
                 tooltip=[alt.Tooltip('Age Band:N'),
                          alt.Tooltip('Students:Q', title='Students Count')]
@@ -150,7 +153,7 @@ class OA_Pop_summary:
             # Chart for Non-Students (stacked on top, in orange)
             chart_non_student = alt.Chart(pop_df).mark_bar(color='#ff7f0e').encode(
                 x=alt.X('Age Band:N', sort=five_year_bands),
-                y=alt.Y('NonStudentTop:Q', scale=alt.Scale(type='log', domain=y_domain)),
+                y=alt.Y('NonStudentTop:Q', scale=alt.Scale(domain=y_domain)),
                 y2=alt.Y2('NonStudentBottom:Q'),
                 tooltip=[alt.Tooltip('Age Band:N'),
                          alt.Tooltip('Non-Student:Q', title='Non-Student Count')]
@@ -165,7 +168,7 @@ class OA_Pop_summary:
             st.altair_chart(layered_chart, use_container_width=True)
 
 ##########################################
-# CLASS: OA_Communal (Interactive Altair)
+# CLASS: OA_Communal (Communal Residents)
 ##########################################
 
 class OA_Communal:
@@ -191,7 +194,7 @@ class OA_Communal:
             non_communal_totals = student_df[~student_df['accommodation type'].isin(excluded_types)][age_cols].sum()
 
             ########################################
-            # Chart 1: Grouped Bar Chart
+            # Chart 1: Grouped Bar Chart (fixed y-axis lower limit 0)
             ########################################
             grouped_data = []
             for cat in age_cols:
@@ -211,14 +214,12 @@ class OA_Communal:
                     'Count': does_not_apply_totals[cat]
                 })
             grouped_df = pd.DataFrame(grouped_data)
+            print(tabulate(grouped_df, headers='keys', tablefmt='psql', showindex=False))
 
             grouped_chart = alt.Chart(grouped_df).mark_bar().encode(
                 x=alt.X('Age Category:N', sort=age_cols, title='Age Categories'),
-                # xOffset groups the bars side-by-side for each Age Category.
                 xOffset=alt.X('Accom Category:N', sort=['Communal Student', 'Non-Communal Student', 'Not Student']),
-                y=alt.Y('Count:Q',
-                        scale=alt.Scale(type='log', domain=[1, grouped_df['Count'].max() * 1.1]),
-                        title='Number of People'),
+                y=alt.Y('Count:Q', scale=alt.Scale(domain=[0, grouped_df['Count'].max() * 1.1]), title='Number of People'),
                 color=alt.Color('Accom Category:N',
                                 scale=alt.Scale(
                                     domain=['Communal Student', 'Non-Communal Student', 'Not Student'],
@@ -274,10 +275,18 @@ class OA_Communal:
                     cumulative += count
             stacked_df = pd.DataFrame(stacked_rows)
 
+            # Compute an appropriate y-axis domain for the stacked chart.
+            max_top = stacked_df['Top'].max()
+
+            # Determine unique bin edges from age_ranges.
+            bin_edges = sorted({edge for r in age_ranges.values() for edge in r})
+
             stacked_chart = alt.Chart(stacked_df).mark_bar().encode(
-                x=alt.X('AgeStart:Q', title='Age', scale=alt.Scale(domain=[0, 35])),
+                x=alt.X('AgeStart:Q', title='Age',
+                        scale=alt.Scale(domain=[0, 35]),
+                        axis=alt.Axis(values=bin_edges, labelAngle=0)),
                 x2='AgeEnd:Q',
-                y=alt.Y('Top:Q', title='Number of People'),
+                y=alt.Y('Top:Q', title='Number of People', scale=alt.Scale(domain=[0, max_top * 1.1])),
                 y2='Bottom:Q',
                 color=alt.Color('Accom Type:N',
                                 scale=alt.Scale(
