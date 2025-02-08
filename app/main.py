@@ -25,6 +25,11 @@ class Main:
 
         # --- Sidebar: Regions & Layer Options ---
         st.sidebar.header("Filters & Options")
+
+        # Ensure `unique_regions` and `selected_regions` are always defined
+        unique_regions = []  # Default empty list
+        selected_regions = []  # Default empty list
+
         if os.path.exists(self.regions_file):
             df_regions = pd.read_csv(self.regions_file)
             unique_regions = df_regions['region'].dropna().unique().tolist()
@@ -32,9 +37,10 @@ class Main:
             selected_regions = st.sidebar.multiselect("Select Regions", options=unique_regions, default=['North East'])
             regions = selected_regions if selected_regions else None
         else:
-            selected_regions = []  # Now defined even if file doesn't exist
-            unique_regions = []
-            regions = None
+            regions = None  # Ensure `regions` is also always defined
+
+        # --- Load and Process Data (cached) ---
+        data_loader = load_all_data(unique_regions, regions)
 
         st.sidebar.subheader("Feature Layers")
         feature_options = {
