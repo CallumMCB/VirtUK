@@ -3,6 +3,7 @@
 import os
 import geopandas as gpd
 import pandas as pd
+import streamlit as st
 
 DATA_PATH = 'data_2021'  # Adjust as needed
 
@@ -134,9 +135,9 @@ class DataLoader:
                 self.df_hospices[region] = self.drop_missing_coordinates(
                     self.df_hospices.get(region, pd.DataFrame()), ['latitude', 'longitude']
                 )
-                self.df_trusts[region] = self.drop_missing_coordinates(
-                    self.df_trusts.get(region, pd.DataFrame()), ['latitude', 'longitude']
-                )
+                # self.df_trusts[region] = self.drop_missing_coordinates(
+                #     self.df_trusts.get(region, pd.DataFrame()), ['latitude', 'longitude']
+                # )
         else:
             # If not using regional data, check if variables are dictionaries or DataFrames
             if isinstance(self.df_care_homes, pd.DataFrame):
@@ -151,13 +152,17 @@ class DataLoader:
                 self.df_hospices = self.drop_missing_coordinates(
                     self.df_hospices, ['latitude', 'longitude']
                 )
-            if isinstance(self.df_trusts, pd.DataFrame):
-                self.df_trusts = self.drop_missing_coordinates(
-                    self.df_trusts, ['latitude', 'longitude']
-                )
+            # if isinstance(self.df_trusts, pd.DataFrame):
+            #     self.df_trusts = self.drop_missing_coordinates(
+            #         self.df_trusts, ['latitude', 'longitude']
+            #     )
 
     @staticmethod
     def drop_missing_coordinates(df, coordinate_columns):
+        if not isinstance(df, pd.DataFrame):
+            # Log a warning if needed
+            st.warning("Expected a DataFrame, but got {}. Returning an empty DataFrame.".format(type(df)))
+            return pd.DataFrame()
         return df.dropna(subset=coordinate_columns).reset_index(drop=True)
 
 
