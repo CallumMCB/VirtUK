@@ -15,10 +15,11 @@ class DataLoader:
         each file is loaded separately and stored in a dictionary keyed by region.
         """
         # Normalize regions: if a string is passed, wrap it in a list.
-        if regions is not None:
-            if isinstance(regions, str):
-                regions = [regions]
+        if isinstance(regions, str):
+            regions = [regions]
+        print(regions)
         self.regions = regions
+
         self.load_file_paths()
         self.load_data()
         self.process_data()
@@ -28,97 +29,95 @@ class DataLoader:
         Build file paths. If regions are provided, we build a dictionary of file paths
         for each region. Otherwise we use the default (un-split) paths.
         """
-        if self.regions:
-            # Initialize a dictionary to hold file paths for each region.
-            self.file_paths = {}
-            for region in self.regions:
-                # Construct region-specific directories for each category.
-                geo_dir = os.path.join(DATA_PATH, 'input', 'geography', 'regions', region)
-                demo_dir = os.path.join(DATA_PATH, 'input', 'demography', 'age_dist_2021')
-                com_dir = os.path.join(DATA_PATH, 'input', 'households', 'communal_establishments', 'regions', region)
-                nhs_dir = os.path.join(DATA_PATH, 'input', 'NHS_trusts', 'regions', region)
+        # Initialize a dictionary to hold file paths for each region.
+        self.file_paths = {}
+        for region in self.regions:
+            # Construct region-specific directories for each category.
+            geo_dir = os.path.join(DATA_PATH, 'input', 'geography', 'regions', region)
+            demo_dir = os.path.join(DATA_PATH, 'input', 'demography', 'age_dist_2021')
+            com_dir = os.path.join(DATA_PATH, 'input', 'households', 'communal_establishments', 'regions', region)
+            nhs_dir = os.path.join(DATA_PATH, 'input', 'NHS_trusts', 'regions', region)
 
-                self.file_paths[region] = {
-                    # Geography files.
-                    'oa_boundaries_file': os.path.join(geo_dir, 'oa_boundaries.geojson'),
-                    'msoa_boundaries_file': os.path.join(geo_dir, 'msoa_boundaries.geojson'),
-                    'lad_boundaries_file': os.path.join(geo_dir, 'lad_boundaries.geojson'),
-                    'oa_msoa_lad_regions_file': os.path.join(geo_dir, 'oa_msoa_lad_regions.csv'),
-                    # Demography files.
-                    'total_age_msoa_file': os.path.join(demo_dir, 'msoa_total_population.csv'),
-                    'female_age_msoa_file': os.path.join(demo_dir, 'msoa_female_population.csv'),
-                    'five_year_ages_file': os.path.join(demo_dir, '5_year_ages_oa_(actual).csv'),
-                    # Communal establishments files.
-                    'communal_residents_msoa_oa_file': os.path.join(com_dir, 'communal_residents_msoa_oa.csv'),
-                    'care_homes_file': os.path.join(com_dir, 'care_homes_occupancy_filled.csv'),
-                    'resident_type_msoa_file': os.path.join(com_dir, 'resident_type_msoa.csv'),
-                    'female_residents_file': os.path.join(com_dir, 'female_residents_msoa.csv'),
-                    'male_residents_file': os.path.join(com_dir, 'male_residents_msoa.csv'),
-                    'staff_or_temporary_file': os.path.join(com_dir, 'staff_or_temporary_msoa.csv'),
-                    # Additional communal establishments:
-                    'establishment_type_msoa_file': os.path.join(com_dir, 'establishment_type_msoa.csv'),
-                    'student_accommodation_file': os.path.join(com_dir, 'student accommodation.csv'),
-                    'prisons_formatted_file': os.path.join(com_dir, 'prisons_formatted.csv'),
-                    # NHS files.
-                    'trusts_file': os.path.join(nhs_dir, 'unique_trust_locations.csv'),
-                    'hospitals_file': os.path.join(nhs_dir, 'unique_hospital_locations.csv'),
-                    'hospice_file': os.path.join(nhs_dir, 'unique_hospice_locations.csv'),
-                }
+            self.file_paths[region] = {
+                # Geography files.
+                'oa_boundaries_file': os.path.join(geo_dir, 'oa_boundaries.geojson'),
+                'msoa_boundaries_file': os.path.join(geo_dir, 'msoa_boundaries.geojson'),
+                'lad_boundaries_file': os.path.join(geo_dir, 'lad_boundaries.geojson'),
+                'oa_msoa_lad_regions_file': os.path.join(geo_dir, 'oa_msoa_lad_regions.csv'),
+                # Demography files.
+                'total_age_msoa_file': os.path.join(demo_dir, 'msoa_total_population.csv'),
+                'female_age_msoa_file': os.path.join(demo_dir, 'msoa_female_population.csv'),
+                'five_year_ages_file': os.path.join(demo_dir, '5_year_ages_oa_(actual).csv'),
+                # Communal establishments files.
+                'communal_residents_msoa_oa_file': os.path.join(com_dir, 'communal_residents_msoa_oa.csv'),
+                'care_homes_file': os.path.join(com_dir, 'care_homes_occupancy_filled.csv'),
+                'resident_type_msoa_file': os.path.join(com_dir, 'resident_type_msoa.csv'),
+                'female_residents_file': os.path.join(com_dir, 'female_residents_msoa.csv'),
+                'male_residents_file': os.path.join(com_dir, 'male_residents_msoa.csv'),
+                'staff_or_temporary_file': os.path.join(com_dir, 'staff_or_temporary_msoa.csv'),
+                # Additional communal establishments:
+                'establishment_type_msoa_file': os.path.join(com_dir, 'establishment_type_msoa.csv'),
+                'student_accommodation_file': os.path.join(com_dir, 'student accommodation.csv'),
+                'prisons_formatted_file': os.path.join(com_dir, 'prisons_formatted.csv'),
+                # NHS files.
+                'trusts_file': os.path.join(nhs_dir, 'unique_trust_locations.csv'),
+                'hospitals_file': os.path.join(nhs_dir, 'unique_hospital_locations.csv'),
+                'hospice_file': os.path.join(nhs_dir, 'unique_hospice_locations.csv'),
+            }
 
     def load_data(self):
         """
         Load files into GeoDataFrames and DataFrames. When multiple regions are provided,
         each file is loaded and stored in a dictionary keyed by region.
         """
-        if self.regions:
-            # Initialize dictionaries for each data category.
-            self.oa_boundaries = {}
-            self.msoa_boundaries = {}
-            self.lad_boundaries = {}
-            self.df_oa_msoa_lad_regions = {}
-            self.df_care_homes = {}
-            self.df_resident_type_msoa = {}
-            self.df_female_residents = {}
-            self.df_male_residents = {}
-            self.df_staff_or_temporary = {}
-            self.df_trusts = {}
-            self.df_hospitals = {}
-            self.df_hospices = {}
-            # New demography files:
-            self.df_total_age = {}
-            self.df_female_age = {}
-            self.df_five_year_ages = {}
-            # Additional communal establishments files:
-            self.df_communal_residents_msoa_oa = {}
-            self.df_establishment_type_msoa = {}
-            self.df_student_accommodation = {}
-            self.df_prisons_formatted = {}
+        # Initialize dictionaries for each data category.
+        self.oa_boundaries = {}
+        self.msoa_boundaries = {}
+        self.lad_boundaries = {}
+        self.df_oa_msoa_lad_regions = {}
+        self.df_care_homes = {}
+        self.df_resident_type_msoa = {}
+        self.df_female_residents = {}
+        self.df_male_residents = {}
+        self.df_staff_or_temporary = {}
+        self.df_trusts = {}
+        self.df_hospitals = {}
+        self.df_hospices = {}
+        # New demography files:
+        self.df_total_age = {}
+        self.df_female_age = {}
+        self.df_five_year_ages = {}
+        # Additional communal establishments files:
+        self.df_communal_residents_msoa_oa = {}
+        self.df_establishment_type_msoa = {}
+        self.df_student_accommodation = {}
+        self.df_prisons_formatted = {}
 
-            for region, paths_dict in self.file_paths.items():
-                # Geography files.
-                self.oa_boundaries[region] = gpd.read_file(paths_dict['oa_boundaries_file'])
-                self.msoa_boundaries[region] = gpd.read_file(paths_dict['msoa_boundaries_file'])
-                self.lad_boundaries[region] = gpd.read_file(paths_dict['lad_boundaries_file'])
-                self.df_oa_msoa_lad_regions[region] = pd.read_csv(paths_dict['oa_msoa_lad_regions_file'])
-                # Communal establishments files.
-                self.df_communal_residents_msoa_oa[region] = pd.read_csv(paths_dict['communal_residents_msoa_oa_file'])
-                self.df_care_homes[region] = pd.read_csv(paths_dict['care_homes_file'])
-                self.df_resident_type_msoa[region] = pd.read_csv(paths_dict['resident_type_msoa_file'])
-                self.df_female_residents[region] = pd.read_csv(paths_dict['female_residents_file'])
-                self.df_male_residents[region] = pd.read_csv(paths_dict['male_residents_file'])
-                self.df_staff_or_temporary[region] = pd.read_csv(paths_dict['staff_or_temporary_file'])
-                # NHS files.
-                self.df_trusts[region] = pd.read_csv(paths_dict['trusts_file'])
-                self.df_hospitals[region] = pd.read_csv(paths_dict['hospitals_file'])
-                self.df_hospices[region] = pd.read_csv(paths_dict['hospice_file'])
-                # Demography files.
-                self.df_total_age[region] = pd.read_csv(paths_dict['total_age_msoa_file'])
-                self.df_female_age[region] = pd.read_csv(paths_dict['female_age_msoa_file'])
-                self.df_five_year_ages[region] = pd.read_csv(paths_dict['five_year_ages_file'])
-                # Additional communal establishments files.
-                self.df_establishment_type_msoa[region] = pd.read_csv(paths_dict['establishment_type_msoa_file'])
-                self.df_student_accommodation[region] = pd.read_csv(paths_dict['student_accommodation_file'])
-                self.df_prisons_formatted[region] = pd.read_csv(paths_dict['prisons_formatted_file'])
+        for region, paths_dict in self.file_paths.items():
+            # Geography files.
+            self.oa_boundaries[region] = gpd.read_file(paths_dict['oa_boundaries_file'])
+            self.msoa_boundaries[region] = gpd.read_file(paths_dict['msoa_boundaries_file'])
+            self.lad_boundaries[region] = gpd.read_file(paths_dict['lad_boundaries_file'])
+            self.df_oa_msoa_lad_regions[region] = pd.read_csv(paths_dict['oa_msoa_lad_regions_file'])
+            # Communal establishments files.
+            self.df_communal_residents_msoa_oa[region] = pd.read_csv(paths_dict['communal_residents_msoa_oa_file'])
+            self.df_care_homes[region] = pd.read_csv(paths_dict['care_homes_file'])
+            self.df_resident_type_msoa[region] = pd.read_csv(paths_dict['resident_type_msoa_file'])
+            self.df_female_residents[region] = pd.read_csv(paths_dict['female_residents_file'])
+            self.df_male_residents[region] = pd.read_csv(paths_dict['male_residents_file'])
+            self.df_staff_or_temporary[region] = pd.read_csv(paths_dict['staff_or_temporary_file'])
+            # NHS files.
+            self.df_trusts[region] = pd.read_csv(paths_dict['trusts_file'])
+            self.df_hospitals[region] = pd.read_csv(paths_dict['hospitals_file'])
+            self.df_hospices[region] = pd.read_csv(paths_dict['hospice_file'])
+            # Demography files.
+            self.df_total_age[region] = pd.read_csv(paths_dict['total_age_msoa_file'])
+            self.df_female_age[region] = pd.read_csv(paths_dict['female_age_msoa_file'])
+            self.df_five_year_ages[region] = pd.read_csv(paths_dict['five_year_ages_file'])
+            # Additional communal establishments files.
+            self.df_establishment_type_msoa[region] = pd.read_csv(paths_dict['establishment_type_msoa_file'])
+            self.df_student_accommodation[region] = pd.read_csv(paths_dict['student_accommodation_file'])
+            self.df_prisons_formatted[region] = pd.read_csv(paths_dict['prisons_formatted_file'])
 
     def process_data(self):
         """

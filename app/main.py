@@ -27,7 +27,8 @@ class Main:
         st.sidebar.header("Filters & Options")
         if os.path.exists(self.regions_file):
             df_regions = pd.read_csv(self.regions_file)
-            unique_regions = df_regions['region'].unique().tolist()
+            unique_regions = df_regions['region'].dropna().unique().tolist()
+            unique_regions = [region for region in unique_regions if region != 'Wales']
             selected_regions = st.sidebar.multiselect("Select Regions", options=unique_regions, default=['North East'])
             regions = selected_regions if selected_regions else None
         else:
@@ -65,7 +66,7 @@ class Main:
             st.session_state.last_area_clicked = None
 
         # --- Load and Process Data (cached) ---
-        data_loader = load_all_data(regions)
+        data_loader = load_all_data(unique_regions, regions)
         self.msoa_op = MSOAOutput(self, data_loader)
         self.oa_op = OAOutput(self, data_loader)  # Make sure OAOutput is defined!
         self.care_op = CareOutput(self)

@@ -5,7 +5,9 @@ from map_plotter import get_map
 from msoa_plotter import get_msoa_map
 
 @st.cache_data(show_spinner=True)
-def load_all_data(regions):
+def load_all_data(unique_regions, regions):
+    if regions == None:
+        regions = unique_regions
     data_loader = DataLoader(regions)
     DataFilter(data_loader, regions=regions)
     return data_loader
