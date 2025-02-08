@@ -119,29 +119,6 @@ class DataLoader:
                 self.df_establishment_type_msoa[region] = pd.read_csv(paths_dict['establishment_type_msoa_file'])
                 self.df_student_accommodation[region] = pd.read_csv(paths_dict['student_accommodation_file'])
                 self.df_prisons_formatted[region] = pd.read_csv(paths_dict['prisons_formatted_file'])
-        else:
-            default_paths = self.file_paths['default']
-            self.oa_boundaries = gpd.read_file(default_paths['oa_boundaries_file'])
-            self.msoa_boundaries = gpd.read_file(default_paths['msoa_boundaries_file'])
-            self.lad_boundaries = gpd.read_file(default_paths['lad_boundaries_file'])
-            self.df_oa_msoa_lad_regions = pd.read_csv(default_paths['oa_msoa_lad_regions_file'])
-            self.df_communal_residents_msoa_oa = pd.read_csv(default_paths['communal_residents_msoa_oa_file'])
-            self.df_care_homes = pd.read_csv(default_paths['care_homes_file'])
-            self.df_resident_type_msoa = pd.read_csv(default_paths['resident_type_msoa_file'])
-            self.df_female_residents = pd.read_csv(default_paths['female_residents_file'])
-            self.df_male_residents = pd.read_csv(default_paths['male_residents_file'])
-            self.df_staff_or_temporary = pd.read_csv(default_paths['staff_or_temporary_file'])
-            self.df_trusts = pd.read_csv(default_paths['trusts_file'])
-            self.df_hospitals = pd.read_csv(default_paths['hospitals_file'])
-            self.df_hospices = pd.read_csv(default_paths['hospice_file'])
-            # Demography files.
-            self.df_total_age = pd.read_csv(default_paths['total_age_msoa_file'])
-            self.df_female_age = pd.read_csv(default_paths['female_age_msoa_file'])
-            self.df_five_year_ages = pd.read_csv(default_paths['five_year_ages_file'])
-            # Additional communal establishments files.
-            self.df_establishment_type_msoa = pd.read_csv(default_paths['establishment_type_msoa_file'])
-            self.df_student_accommodation = pd.read_csv(default_paths['student_accommodation_file'])
-            self.df_prisons_formatted = pd.read_csv(default_paths['prisons_formatted_file'])
 
     def process_data(self):
         """
