@@ -37,7 +37,7 @@ class Main:
             selected_regions = st.sidebar.multiselect("Select Regions", options=unique_regions, default=['North East'])
             regions = selected_regions if selected_regions else None
         else:
-            print(self.regions_file, "not found.")
+            st.write(self.regions_file, "not found.")
             regions = None  # Ensure `regions` is also always defined
 
         # --- Load and Process Data (cached) ---
