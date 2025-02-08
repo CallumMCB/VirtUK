@@ -4,7 +4,8 @@ import os
 import geopandas as gpd
 import pandas as pd
 
-DATA_PATH = 'data_2021'  # Adjust as needed
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_PATH = os.path.join(BASE_DIR, "data_2021")
 
 
 class DataLoader:

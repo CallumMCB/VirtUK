@@ -7,7 +7,8 @@ from caching_helpers import load_all_data, create_map, create_sub_map
 from pprint import pprint
 from outputs import MSOAOutput, OAOutput, CareOutput  # Ensure OAOutput exists!
 
-DATA_PATH = 'data_2021'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_PATH = os.path.join(BASE_DIR, "data_2021")
 
 class Main:
     def __init__(self):
