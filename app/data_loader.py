@@ -10,11 +10,6 @@ DATA_PATH = os.path.join(BASE_DIR, "data_2021")
 
 class DataLoader:
     def __init__(self, regions=None):
-        """
-        If regions is provided (as a list or a string), the loader reads data
-        from the pre-split region-specific folders. When multiple regions are passed,
-        each file is loaded separately and stored in a dictionary keyed by region.
-        """
         # Normalize regions: if a string is passed, wrap it in a list.
         if isinstance(regions, str):
             regions = [regions]
@@ -28,7 +23,7 @@ class DataLoader:
     def load_file_paths(self):
         """
         Build file paths. If regions are provided, we build a dictionary of file paths
-        for each region. Otherwise we use the default (un-split) paths.
+        for each region, otherwise we use the default (un-split) paths.
         """
         # Initialize a dictionary to hold file paths for each region.
         self.file_paths = {}

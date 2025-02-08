@@ -12,7 +12,6 @@ alt.renderers.set_embed_options(vegaLiteVersion="5")
 
 class OAOutput:
     def __init__(self, main_container, data):
-        # main_container should be an object with at least an attribute `col1`
         self.main = main_container
         self.oa_data = data
 
@@ -20,9 +19,9 @@ class OAOutput:
         # Here we filter on the 'area' column (the OA code)
         if isinstance(dataset, dict):
             for region, df in dataset.items():
-                if oa in set(df['area']):  # Using a set for O(1) lookup
+                if oa in set(df['area']):
                     return df.loc[df['area'] == oa]
-            return pd.DataFrame()  # Return an empty DataFrame if not found
+            return pd.DataFrame()
         else:
             return dataset.loc[dataset['area'] == oa]
 
@@ -37,7 +36,6 @@ class OAOutput:
     def display_other(self, tab, oa):
         with tab:
             st.write("Other Data (Placeholder)")
-            # Additional content for the 'Other' tab
 ##########################################
 # CLASS: OA_Pop_summary (Population Summary)
 ##########################################

@@ -5,16 +5,15 @@ import altair as alt
 
 class MSOAOutput:
     def __init__(self, main_container, data_loader):
-        # main_container should be an object with at least an attribute `col1`
         self.main = main_container
         self.data = data_loader
 
     def get_msoa_data(self, dataset, msoa):
         if isinstance(dataset, dict):
             for region, df in dataset.items():
-                if msoa in set(df['msoa']):  # Convert to set for O(1) lookup
+                if msoa in set(df['msoa']):
                     return df.loc[df['msoa'] == msoa]
-            return pd.DataFrame()  # Return empty DataFrame if MSOA not found
+            return pd.DataFrame()
         else:
             return dataset.loc[dataset['msoa'] == msoa]
 

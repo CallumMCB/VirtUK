@@ -2,7 +2,7 @@ import folium
 from folium.plugins import MarkerCluster
 from tqdm import tqdm
 from shapely.geometry import mapping
-from object_identifiers import CareLocations  # Assumed to be defined elsewhere
+from object_identifiers import CareLocations
 import streamlit as st
 
 class MSOAPlotter:
