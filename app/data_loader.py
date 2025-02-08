@@ -126,30 +126,35 @@ class DataLoader:
         if self.regions:
             for region in self.regions:
                 self.df_care_homes[region] = self.drop_missing_coordinates(
-                    self.df_care_homes[region], ['Location Latitude', 'Location Longitude']
+                    self.df_care_homes.get(region, pd.DataFrame()), ['Location Latitude', 'Location Longitude']
                 )
                 self.df_hospitals[region] = self.drop_missing_coordinates(
-                    self.df_hospitals[region], ['latitude', 'longitude']
+                    self.df_hospitals.get(region, pd.DataFrame()), ['latitude', 'longitude']
                 )
                 self.df_hospices[region] = self.drop_missing_coordinates(
-                    self.df_hospices[region], ['latitude', 'longitude']
+                    self.df_hospices.get(region, pd.DataFrame()), ['latitude', 'longitude']
                 )
                 self.df_trusts[region] = self.drop_missing_coordinates(
-                    self.df_trusts[region], ['latitude', 'longitude']
+                    self.df_trusts.get(region, pd.DataFrame()), ['latitude', 'longitude']
                 )
         else:
-            self.df_care_homes = self.drop_missing_coordinates(
-                self.df_care_homes, ['Location Latitude', 'Location Longitude']
-            )
-            self.df_hospitals = self.drop_missing_coordinates(
-                self.df_hospitals, ['latitude', 'longitude']
-            )
-            self.df_hospices = self.drop_missing_coordinates(
-                self.df_hospices, ['latitude', 'longitude']
-            )
-            self.df_trusts = self.drop_missing_coordinates(
-                self.df_trusts, ['latitude', 'longitude']
-            )
+            # If not using regional data, check if variables are dictionaries or DataFrames
+            if isinstance(self.df_care_homes, pd.DataFrame):
+                self.df_care_homes = self.drop_missing_coordinates(
+                    self.df_care_homes, ['Location Latitude', 'Location Longitude']
+                )
+            if isinstance(self.df_hospitals, pd.DataFrame):
+                self.df_hospitals = self.drop_missing_coordinates(
+                    self.df_hospitals, ['latitude', 'longitude']
+                )
+            if isinstance(self.df_hospices, pd.DataFrame):
+                self.df_hospices = self.drop_missing_coordinates(
+                    self.df_hospices, ['latitude', 'longitude']
+                )
+            if isinstance(self.df_trusts, pd.DataFrame):
+                self.df_trusts = self.drop_missing_coordinates(
+                    self.df_trusts, ['latitude', 'longitude']
+                )
 
     @staticmethod
     def drop_missing_coordinates(df, coordinate_columns):
