@@ -1,0 +1,39 @@
+#####  Demography #####
+
+oa age by 5 year band - TS007A [1]
+msoa age by single year and sex [2]
+age by broad band (11 categories) [2]
+partnership status by age and sex [3]
+
+[1] https://www.nomisweb.co.uk/sources/census_2021_bulk
+[2] https://www.ons.gov.uk/filters/cda7a290-676d-400b-9b64-65b0b799cb03/dimensions
+[3] https://www.ons.gov.uk/filters/bac045f9-8372-4090-bd67-cc3895b23043/dimensions#resident_age_18a
+
+Notes:
+1. Age by broad band and sex is also available in [2]
+
+=======================================
+##### Geography #####
+
+lad boundaries 21 GEOJSON file []
+msoa boundaries 21 GEOJSON file []
+oa boundaries 21 GEOJSON file []
+msoa 21 population weighted centroids []
+oa 21 population weighted centroids []
+oa msoa lad best fit lookup []
+
+msoa11 to msoa21 to lad22 lookup []
+
+
+[1] https://www.data.gov.uk/dataset/1938cd26-64f4-4a72-b73f-729cfedd1ca8/local-authority-districts-december-2021-boundaries-gb-bfc
+[2] https://www.data.gov.uk/dataset/677a5164-3a9e-4752-b8e6-5744d2b280ec/middle-layer-super-output-areas-december-2021-boundaries-ew-bgc-v3
+[3] https://www.data.gov.uk/dataset/4d4e021d-fe98-4a0e-88e2-3ead84538537/output-areas-december-2021-boundaries-ew-bgc-v21
+[4] https://geoportal.statistics.gov.uk/datasets/ons::output-areas-december-2021-ew-population-weighted-centroids-v3/about
+[5] https://geoportal.statistics.gov.uk/datasets/3f9683df01604d6f8e0abbbe05acb300_0/about
+[6] https://geoportal.statistics.gov.uk/datasets/589ae01495bf4ddfaaa25b96476d53d7/about
+[7] https://geoportal.statistics.gov.uk/datasets/25ebebcdbffb4af1b87600efe52f9cd8_0/about
+
+=======================================
+##### Households #####
+
+------- Communal Establishments -------
