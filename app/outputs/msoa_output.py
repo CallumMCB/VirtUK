@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 from streamlit import expander
 import altair as alt
 
@@ -34,7 +35,7 @@ class MSOA_Pop_summary(MSOAOutput):
     def main(self, tab, msoa):
         with tab:
             st.subheader('Population Summary')
-            with expander("Population Pyramids", expanded=True):
+            with st.expander("Population Pyramids", expanded=True):
                 # Retrieve demographic data for the MSOA.
                 total_df = self.get_msoa_data(self.data.df_total_age, msoa)
                 female_df = self.get_msoa_data(self.data.df_female_age, msoa)
@@ -42,182 +43,239 @@ class MSOA_Pop_summary(MSOAOutput):
                     st.write("No demographic data available for this MSOA.")
                     return
 
-                # Create sub-tabs for the two versions.
-                sub_tab1, sub_tab2 = st.tabs(["Age by Single Year", "Age by 5 Year"])
+                # Precompute population data once.
+                df_population = MSOA_Pop_summary.precompute_population_data(self, total_df, female_df)
+
+                # Create sub-tabs for the two versions and the table.
+                sub_tab1, sub_tab2, sub_tab3 = st.tabs([
+                    "Age by Single Year", "Age by 5 Year", "Data Table"
+                ])
+
+                # Chart for single year pyramid.
                 with sub_tab1:
-                    chart_single = MSOA_Pop_summary.create_population_pyramid_single(self, total_df, female_df)
+                    chart_single = MSOA_Pop_summary.create_population_pyramid_single(self, df_population)
                     st.altair_chart(chart_single, use_container_width=True)
+
+                # Chart for five year pyramid.
                 with sub_tab2:
-                    chart_five = MSOA_Pop_summary.create_population_pyramid_five(self, total_df, female_df)
+                    chart_five = MSOA_Pop_summary.create_population_pyramid_five(self, df_population)
                     st.altair_chart(chart_five, use_container_width=True)
 
-    def create_population_pyramid_single(self, total_df, female_df):
+                # Display a table of single year population data.
+                with sub_tab3:
+                    st.dataframe(df_population.set_index('age'))
+
+    def precompute_population_data(self, total_df, female_df):
+        """
+        Precompute a single–year population table with columns:
+          - age
+          - male (computed as total - female)
+          - female
+          - total
+
+        Assumes that there is only one row in the msoa data.
+        Vectorises over ages 0–90.
+        """
+        # Get the only row corresponding to the MSOA.
         total_row = total_df.iloc[0]
         female_row = female_df.iloc[0]
-        # Create a list of ages from 0 to 90.
-        ages = list(range(0, 91))
-        male_counts = []
-        female_counts = []
-        for age in ages:
-            age_str = str(age)
-            total_val = total_row.get(age_str, 0)
-            female_val = female_row.get(age_str, 0)
-            male_val = total_val - female_val
-            male_counts.append(male_val)
-            female_counts.append(female_val)
-        # For the pyramid, make male counts negative.
-        male_counts = [-x for x in male_counts]
 
-        # Build a DataFrame. Create a string version for the y-axis.
-        df_pyramid = pd.DataFrame({
+        # Create an array of ages and matching string labels (to match DataFrame columns).
+        ages = np.arange(0, 91)
+        age_labels = [str(age) for age in ages]
+
+        # Reindex each Series over these age labels and fill missing values with 0.
+        total_vals = total_row.reindex(age_labels, fill_value=0).astype(int)
+        female_vals = female_row.reindex(age_labels, fill_value=0).astype(int)
+
+        # Precompute male counts.
+        male_vals = total_vals - female_vals
+
+        # Build and return the DataFrame.
+        df_single = pd.DataFrame({
             'age': ages,
-            'age_str': [str(age) for age in ages],
-            'male': male_counts,
-            'female': female_counts
+            'male': male_vals.values,     # positive counts for the table
+            'female': female_vals.values,
+            'total': total_vals.values
         })
+        return df_single
 
-        # Melt to long format.
-        df_long = df_pyramid.melt(id_vars=['age', 'age_str'],
-                                  value_vars=['male', 'female'],
-                                  var_name='sex',
-                                  value_name='count')
+    def create_population_pyramid_single(self, df_population):
+        """
+        Create an Altair bar chart for the population pyramid using single–year data.
+        (For the chart, male counts are made negative.)
+        """
+        # Copy the precomputed data for charting and negate the male counts.
+        df_chart = df_population.copy()
+        df_chart['male'] = -df_chart['male']
+        df_chart['age_str'] = df_chart['age'].astype(str)  # for proper categorical ordering on the y-axis
 
-        # Create the bar chart. To have age 0 at the bottom and age 90 at the top,
-        # we set the scale with reverse=True.
+        # Convert to long format.
+        df_long = df_chart.melt(
+            id_vars=['age', 'age_str'],
+            value_vars=['male', 'female'],
+            var_name='sex',
+            value_name='count'
+        )
+
+        # Build the bar chart.
         chart = alt.Chart(df_long).mark_bar().encode(
             x=alt.X('count:Q',
                     title='Population',
                     axis=alt.Axis(labelExpr="abs(datum.value)")),
             y=alt.Y('age_str:N',
                     title='Age',
-                    sort=[str(x) for x in ages],  # order as strings "0", "1", ..., "90"
-                    scale=alt.Scale(domain=[str(x) for x in ages], reverse=True),
+                    sort=[str(x) for x in range(0, 91)],
+                    scale=alt.Scale(domain=[str(x) for x in range(0, 91)], reverse=True),
                     axis=alt.Axis(values=[str(x) for x in range(0, 91, 5)], grid=True)
                     ),
             color=alt.Color('sex:N',
                             title='Sex',
-                            scale=alt.Scale(domain=['male', 'female'],
-                                            range=['blue', 'red'])),
+                            scale=alt.Scale(
+                                domain=['male', 'female'],
+                                range=['blue', 'red']
+                            )),
             tooltip=['age:Q', 'sex:N', 'count:Q']
         ).properties(
             width=400,
             height=400
         )
-
-        # Add text labels above each bar (show absolute value).
-        # text = alt.Chart(df_long).transform_calculate(
-        #     abs_count="abs(datum.count)"
-        # # ).mark_text(
-        # #     align='center',
-        # #     baseline='middle',
-        # #     dy=-3,
-        # #     fontSize=12,
-        # #     color='black'
-        # # ).encode(
-        # #     x=alt.X('count:Q', axis=alt.Axis(labelExpr="abs(datum.value)")),
-        # #     y=alt.Y('age_str:N', sort=[str(x) for x in ages],
-        # #             scale=alt.Scale(domain=[str(x) for x in ages], reverse=True)),
-        # #     text='abs_count:Q'
-        # # )
-
         return chart
 
-    def create_population_pyramid_five(self, total_df, female_df):
-        total_row = total_df.iloc[0]
-        female_row = female_df.iloc[0]
-        # Define 5-year bins: 0-4, 5-9, ... 85-89, and 90+.
-        bins = []
-        bin_labels = []
-        for start in range(0, 90, 5):
-            bins.append((start, start + 4))
-            bin_labels.append(f"{start}-{start + 4}")
-        bins.append((90, 150))  # 90+ bracket; assume 150 is sufficiently high.
-        bin_labels.append("90+")
+    def create_population_pyramid_five(self, df_population):
+        """
+        Create an Altair layered bar chart for the five–year population pyramid.
+        This method groups the precomputed single–year data into 5–year bins and then
+        computes, for each bin:
+          - The "common" count (the minimum of male and female counts)
+          - The "excess" counts (the remainder for each sex)
+        """
+        # Work on a copy of the precomputed data.
+        df_single = df_population.copy()
 
-        data_rows = []
-        for i, (low, high) in enumerate(bins):
-            label = bin_labels[i]
-            ages_in_bin = [str(age) for age in range(low, high + 1)]
-            total_sum = sum([total_row.get(age, 0) for age in ages_in_bin])
-            female_sum = sum([female_row.get(age, 0) for age in ages_in_bin])
-            male_sum = total_sum - female_sum
-            # Compute the common amount and excess.
-            common = min(male_sum, female_sum)
-            male_excess = male_sum - common
-            female_excess = female_sum - common
-            # For male, values are negative.
-            data_rows.append({
-                'age_bin': label,
-                'sex': 'male',
-                'component': 'common',
-                'value': -common,
-                'abs_value': common,
-                'total': male_sum
-            })
-            data_rows.append({
-                'age_bin': label,
-                'sex': 'male',
-                'component': 'excess',
-                'value': -male_excess,
-                'abs_value': male_excess,
-                'total': male_sum
-            })
-            # For female, values are positive.
-            data_rows.append({
-                'age_bin': label,
-                'sex': 'female',
-                'component': 'common',
-                'value': common,
-                'abs_value': common,
-                'total': female_sum
-            })
-            data_rows.append({
-                'age_bin': label,
-                'sex': 'female',
-                'component': 'excess',
-                'value': female_excess,
-                'abs_value': female_excess,
-                'total': female_sum
-            })
-        df_stack = pd.DataFrame(data_rows)
+        # Define bins: 0-4, 5-9, …, 85-89, and 90+.
+        bins = list(range(0, 91, 5)) + [np.inf]
+        labels = [f"{i}-{i+4}" for i in range(0, 90, 5)] + ["90+"]
 
-        # Create a column for color mapping.
-        def fill_color(row):
-            if row['sex'] == 'male' and row['component'] == 'common':
-                return 'male_common'
-            elif row['sex'] == 'male' and row['component'] == 'excess':
-                return 'male_excess'
-            elif row['sex'] == 'female' and row['component'] == 'common':
-                return 'female_common'
-            elif row['sex'] == 'female' and row['component'] == 'excess':
-                return 'female_excess'
+        # Assign each age to a bin.
+        df_single['age_bin'] = pd.cut(df_single['age'], bins=bins, right=False, labels=labels)
 
-        df_stack['fill'] = df_stack.apply(fill_color, axis=1)
+        # Group by age_bin and sum up male, female, and total counts.
+        df_bins = df_single.groupby('age_bin', as_index=False).sum()
 
-        # Build the stacked bar chart.
-        chart = alt.Chart(df_stack).mark_bar().encode(
+        # Compute the common count (shared by both sexes) and the excess for each.
+        df_bins['common'] = df_bins[['male', 'female']].min(axis=1)
+        df_bins['male_excess'] = df_bins['male'] - df_bins['common']
+        df_bins['female_excess'] = df_bins['female'] - df_bins['common']
+
+        # Build the stacked data for the pyramid.
+        # For males, common counts will be negative.
+        male_common = df_bins[['age_bin', 'common']].copy()
+        male_common['sex'] = 'male'
+        male_common['component'] = 'common'
+        male_common['baseline'] = 0
+        male_common['value'] = -male_common['common']
+        male_common = male_common.rename(columns={'common': 'abs_value'})
+        male_common['total'] = df_bins['male']
+
+        male_excess = df_bins[['age_bin', 'male_excess', 'common']].copy()
+        male_excess['sex'] = 'male'
+        male_excess['component'] = 'excess'
+        male_excess['baseline'] = -male_excess['common']
+        male_excess['value'] = -male_excess['common'] - male_excess['male_excess']
+        male_excess = male_excess.rename(columns={'male_excess': 'excess'})
+        male_excess['total'] = df_bins['male']
+
+        # For females, the common counts remain positive.
+        female_common = df_bins[['age_bin', 'common']].copy()
+        female_common['sex'] = 'female'
+        female_common['component'] = 'common'
+        female_common['baseline'] = 0
+        female_common['value'] = female_common['common']
+        female_common = female_common.rename(columns={'common': 'abs_value'})
+        female_common['total'] = df_bins['female']
+
+        female_excess = df_bins[['age_bin', 'female_excess', 'common']].copy()
+        female_excess['sex'] = 'female'
+        female_excess['component'] = 'excess'
+        female_excess['baseline'] = female_excess['common']
+        female_excess['value'] = female_excess['common'] + female_excess['female_excess']
+        female_excess = female_excess.rename(columns={'female_excess': 'excess'})
+        female_excess['total'] = df_bins['female']
+
+        # Combine all parts.
+        df_stack = pd.concat(
+            [male_common, male_excess, female_common, female_excess],
+            ignore_index=True
+        )
+
+        # Create a helper column for fill colors.
+        conditions = [
+            (df_stack['sex'] == 'male') & (df_stack['component'] == 'common'),
+            (df_stack['sex'] == 'male') & (df_stack['component'] == 'excess'),
+            (df_stack['sex'] == 'female') & (df_stack['component'] == 'common'),
+            (df_stack['sex'] == 'female') & (df_stack['component'] == 'excess'),
+        ]
+        choices = ['male_common', 'male_excess', 'female_common', 'female_excess']
+        df_stack['fill'] = np.select(conditions, choices, default='unknown')
+
+        # Build the chart for the common component.
+        chart_common = alt.Chart(
+            df_stack[df_stack['component'] == 'common']
+        ).mark_bar().encode(
             x=alt.X('value:Q',
                     title='Population',
                     axis=alt.Axis(labelExpr="abs(datum.value)")),
             y=alt.Y('age_bin:N',
                     title='Age',
-                    sort=bin_labels,
+                    sort=labels,
                     scale=alt.Scale(reverse=True),
                     axis=alt.Axis(grid=True)),
             color=alt.Color('fill:N',
                             scale=alt.Scale(
-                                domain=['male_common', 'male_excess', 'female_common', 'female_excess'],
-                                range=['lightblue', 'darkblue', 'lightcoral', 'darkred']
-                            )),
-            # Tooltip now shows the total count (for that sex in the bin) regardless of the segment.
-            tooltip=['age_bin:N', 'sex:N', 'total:Q']
-        ).properties(
-            width=400,
-            height=400
+                                domain=['male_common', 'female_common'],
+                                range=['lightblue', 'lightcoral']
+                            ),
+                            legend=alt.Legend(title="Component")),
+            tooltip=[
+                alt.Tooltip('age_bin:N', title='Age Bin'),
+                alt.Tooltip('sex:N', title='Sex'),
+                alt.Tooltip('total:Q', title='Total')
+            ]
+        ).properties(width=400, height=400)
+
+        # Build the chart for the excess component using x2.
+        chart_excess = alt.Chart(
+            df_stack[df_stack['component'] == 'excess']
+        ).mark_bar().encode(
+            x=alt.X('baseline:Q',
+                    title='Population',
+                    axis=alt.Axis(labelExpr="abs(datum.value)")),
+            x2='value:Q',
+            y=alt.Y('age_bin:N',
+                    title='Age',
+                    sort=labels,
+                    scale=alt.Scale(reverse=True),
+                    axis=alt.Axis(grid=True)),
+            color=alt.Color('fill:N',
+                            scale=alt.Scale(
+                                domain=['male_excess', 'female_excess'],
+                                range=['darkblue', 'darkred']
+                            ),
+                            legend=alt.Legend(title="Component")),
+            tooltip=[
+                alt.Tooltip('age_bin:N', title='Age Bin'),
+                alt.Tooltip('sex:N', title='Sex'),
+                alt.Tooltip('total:Q', title='Total'),
+                alt.Tooltip('excess:Q', title='Excess Amount', format=".0f")
+            ]
+        ).properties(width=400, height=400)
+
+        # Layer the two charts.
+        layered_chart = alt.layer(chart_common, chart_excess).resolve_scale(
+            color='independent'
         )
-
-        return chart
-
+        return layered_chart
 
 class MSOA_Communal(MSOAOutput):
     def main(self, tab, msoa):
