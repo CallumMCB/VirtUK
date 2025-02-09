@@ -176,126 +176,177 @@ class OA_Communal:
             st.subheader("Communal Residents")
             # Retrieve student accommodation data filtered by OA.
             student_df = self.get_msoa_data(self.oa_data.df_student_accommodation, oa)
-            if student_df.empty:
-                st.write(f"No communal resident data found for OA: {oa}")
-                return
+            with st.expander("Student Data"):
+                OA_Communal.students(self, student_df)
 
-            # Define which accommodation types are considered communal.
-            communal_types = ["communal establishment: Other", "communal establishment: University"]
-            does_not_apply_type = "Does not apply"
-            excluded_types = communal_types + [does_not_apply_type]
-            age_cols = ["0-4", "5-15", "16-17", "18-20", "21-24", "25-29", "30+"]
 
-            # Compute totals (summing across the age columns) for each group.
-            communal_totals = student_df[student_df['accommodation type'].isin(communal_types)][age_cols].sum()
-            does_not_apply_totals = student_df[student_df['accommodation type'] == does_not_apply_type][age_cols].sum()
-            non_communal_totals = student_df[~student_df['accommodation type'].isin(excluded_types)][age_cols].sum()
+    def students(self, student_df):
+        # Define which accommodation types are considered communal.
+        communal_univ = "communal establishment: University"
+        communal_other = "communal establishment: Other"
+        does_not_apply = "Does not apply"
+        excluded_types = [communal_univ, communal_other, does_not_apply]
+        age_cols = ["0-4", "5-15", "16-17", "18-20", "21-24", "25-29", "30+"]
 
-            ########################################
-            # Chart 1: Grouped Bar Chart (fixed y-axis lower limit 0)
-            ########################################
-            grouped_data = []
-            for cat in age_cols:
-                grouped_data.append({
-                    'Age Category': cat,
-                    'Accom Category': 'Communal Student',
-                    'Count': communal_totals[cat]
+        # Compute totals (summing across the age columns) for each group.
+        communal_univ_totals = student_df[student_df['accommodation type'] == communal_univ][age_cols].sum()
+        communal_other_totals = student_df[student_df['accommodation type'] == communal_other][age_cols].sum()
+        does_not_apply_totals = student_df[student_df['accommodation type'] == does_not_apply][age_cols].sum()
+        non_communal_totals = student_df[~student_df['accommodation type'].isin(excluded_types)][age_cols].sum()
+
+        if communal_univ_totals.sum() + communal_other_totals.sum() == 0:
+            st.write("There are no communal students in this output area.")
+            return
+
+        ########################################
+        # Chart 1: Grouped Bar Chart (fixed y-axis lower limit 0)
+        ########################################
+        grouped_data = []
+        for cat in age_cols:
+            grouped_data.append({
+                'Age Category': cat,
+                'Type Category': 'Communal Student (University)',
+                'Count': communal_univ_totals[cat]
+            })
+            grouped_data.append({
+                'Age Category': cat,
+                'Type Category': 'Communal Student (Other)',
+                'Count': communal_other_totals[cat]
+            })
+            grouped_data.append({
+                'Age Category': cat,
+                'Type Category': 'Non-Communal Student',
+                'Count': non_communal_totals[cat]
+            })
+            grouped_data.append({
+                'Age Category': cat,
+                'Type Category': 'Not Student',
+                'Count': does_not_apply_totals[cat]
+            })
+
+        grouped_df = pd.DataFrame(grouped_data)
+
+        # Create the Altair chart
+        grouped_chart = alt.Chart(grouped_df).mark_bar().encode(
+            x=alt.X(
+                'Age Category:N',
+                sort=age_cols,
+                title='Age Categories',
+                scale=alt.Scale(paddingOuter=0.2),
+                axis=alt.Axis(labelAngle=0, tickBand='extent')
+            ),
+            xOffset=alt.X(
+                'Type Category:N',
+                sort=[
+                    'Communal Student (University)',
+                    'Communal Student (Other)',
+                    'Non-Communal Student',
+                    'Not Student'
+                ],
+                bandPosition=0.2,  # Center the bars within their band
+                scale=alt.Scale(
+                    paddingInner=0.1,
+                    paddingOuter=0.3
+                )
+            ),
+            y=alt.Y(
+                'Count:Q',
+                scale=alt.Scale(domain=[0, grouped_df['Count'].max() * 1.1]),
+                title='Number of People'
+            ),
+            color=alt.Color(
+                'Type Category:N',
+                scale=alt.Scale(scheme='category10'),
+                title='Type Category'
+            ),
+            tooltip=['Age Category', 'Type Category', 'Count']
+        ).properties(
+            width=300,
+            height=300,
+            title='Student vs Non-Student'
+        ).interactive()
+
+        st.altair_chart(grouped_chart, use_container_width=True)
+
+        ########################################
+        # Chart 2: Stacked Density Chart for Non-Communal Accommodation
+        ########################################
+        # Filter out communal and "Does not apply" rows.
+        filtered_non_communal = student_df[~student_df['accommodation type'].isin(excluded_types)]
+        print(tabulate(filtered_non_communal, headers='keys', tablefmt='psql'))
+
+        # Define numerical age ranges corresponding to the broad age bands.
+        age_ranges = {
+            '0-4': (0, 5),
+            '5-15': (5, 16),
+            '16-17': (16, 18),
+            '18-20': (18, 21),
+            '21-24': (21, 25),
+            '25-29': (25, 30),
+            '30+': (30, 35)
+        }
+
+        # Get the unique non-communal accommodation types and assign colors.
+        accom_types = sorted(filtered_non_communal['accommodation type'].unique())
+        color_list = ["#008000", "#FF69B4", "#FFA500", "#66023C"]
+        color_dict = {ac: color_list[i % len(color_list)] for i, ac in enumerate(accom_types)}
+
+        # Build the data for the stacked density chart.
+        stacked_rows = []
+        for age_band in age_cols:
+            start, end = age_ranges[age_band]
+            bin_width = end - start
+            cumulative_density = 0  # cumulative density for stacking
+            for ac in accom_types:
+                # Get the raw count for this accommodation type in the given age band.
+                count = filtered_non_communal.loc[
+                    filtered_non_communal['accommodation type'] == ac, age_band
+                ].sum()
+                # Compute the density: count per unit age.
+                density = count / bin_width if bin_width else 0
+                stacked_rows.append({
+                    'Age Band': age_band,
+                    'Accom Type': ac,
+                    'Count': count,
+                    'Density': density,
+                    'BottomDensity': cumulative_density,
+                    'TopDensity': cumulative_density + density,
+                    'AgeStart': start,
+                    'AgeEnd': end,
+                    'BinWidth': bin_width
                 })
-                grouped_data.append({
-                    'Age Category': cat,
-                    'Accom Category': 'Non-Communal Student',
-                    'Count': non_communal_totals[cat]
-                })
-                grouped_data.append({
-                    'Age Category': cat,
-                    'Accom Category': 'Not Student',
-                    'Count': does_not_apply_totals[cat]
-                })
-            grouped_df = pd.DataFrame(grouped_data)
-            print(tabulate(grouped_df, headers='keys', tablefmt='psql', showindex=False))
+                cumulative_density += density
 
-            grouped_chart = alt.Chart(grouped_df).mark_bar().encode(
-                x=alt.X('Age Category:N', sort=age_cols, title='Age Categories'),
-                xOffset=alt.X('Accom Category:N', sort=['Communal Student', 'Non-Communal Student', 'Not Student']),
-                y=alt.Y('Count:Q', scale=alt.Scale(domain=[0, grouped_df['Count'].max() * 1.1]), title='Number of People'),
-                color=alt.Color('Accom Category:N',
-                                scale=alt.Scale(
-                                    domain=['Communal Student', 'Non-Communal Student', 'Not Student'],
-                                    range=['#FF5733', '#33C1FF', '#FFC300']),
-                                title='Accom. Category'),
-                tooltip=['Age Category', 'Accom Category', 'Count']
-            ).properties(
-                width=300,
-                height=300,
-                title='Residents by Accom. Type and Age (Grouped)'
-            ).interactive()
+        stacked_df = pd.DataFrame(stacked_rows)
 
-            st.altair_chart(grouped_chart, use_container_width=True)
+        # Compute an appropriate y-axis domain for the density values.
+        max_top_density = stacked_df['TopDensity'].max()
 
-            ########################################
-            # Chart 2: Stacked Bar Chart for Non-Communal Accommodation
-            ########################################
-            # Filter out communal and "Does not apply" rows.
-            filtered_non_communal = student_df[~student_df['accommodation type'].isin(excluded_types)]
-            # Define numerical age ranges corresponding to the broad age bands.
-            age_ranges = {
-                '0-4': (0, 5),
-                '5-15': (5, 16),
-                '16-17': (16, 18),
-                '18-20': (18, 21),
-                '21-24': (21, 25),
-                '25-29': (25, 30),
-                '30+': (30, 35)
-            }
-            # Get the unique non-communal accommodation types and assign colors.
-            accom_types = sorted(filtered_non_communal['accommodation type'].unique())
-            color_list = ["#008000", "#FF69B4", "#FFA500", "#66023C"]
-            color_dict = {ac: color_list[i % len(color_list)] for i, ac in enumerate(accom_types)}
+        # Determine unique bin edges from age_ranges.
+        bin_edges = sorted({edge for r in age_ranges.values() for edge in r})
 
-            # Build the data for the stacked chart.
-            stacked_rows = []
-            for age_band in age_cols:
-                start, end = age_ranges[age_band]
-                cumulative = 0
-                for ac in accom_types:
-                    count = filtered_non_communal.loc[
-                        filtered_non_communal['accommodation type'] == ac, age_band
-                    ].sum()
-                    stacked_rows.append({
-                        'Age Band': age_band,
-                        'Accom Type': ac,
-                        'Count': count,
-                        'Bottom': cumulative,
-                        'Top': cumulative + count,
-                        'AgeStart': start,
-                        'AgeEnd': end
-                    })
-                    cumulative += count
-            stacked_df = pd.DataFrame(stacked_rows)
+        # Create the density chart.
+        stacked_chart = alt.Chart(stacked_df).mark_bar().encode(
+            x=alt.X('AgeStart:Q', title='Age',
+                    scale=alt.Scale(domain=[0, 35]),
+                    axis=alt.Axis(values=bin_edges, labelAngle=0)),
+            x2='AgeEnd:Q',
+            y=alt.Y('TopDensity:Q', title='Number Density (count per unit age)',
+                    scale=alt.Scale(domain=[0, max_top_density * 1.1])),
+            y2='BottomDensity:Q',
+            color=alt.Color('Accom Type:N',
+                            scale=alt.Scale(
+                                domain=accom_types,
+                                range=[color_dict[ac] for ac in accom_types]),
+                            title='Accommodation Type'),
+            tooltip=['Age Band', 'Accom Type', 'Count', 'Density']
+        ).properties(
+            width=300,
+            height=300,
+            title='Non-Communal Students by Accommodation Type (Number Density)'
+        ).configure_title(
+            offset=20
+        ).interactive()
 
-            # Compute an appropriate y-axis domain for the stacked chart.
-            max_top = stacked_df['Top'].max()
-
-            # Determine unique bin edges from age_ranges.
-            bin_edges = sorted({edge for r in age_ranges.values() for edge in r})
-
-            stacked_chart = alt.Chart(stacked_df).mark_bar().encode(
-                x=alt.X('AgeStart:Q', title='Age',
-                        scale=alt.Scale(domain=[0, 35]),
-                        axis=alt.Axis(values=bin_edges, labelAngle=0)),
-                x2='AgeEnd:Q',
-                y=alt.Y('Top:Q', title='Number of People', scale=alt.Scale(domain=[0, max_top * 1.1])),
-                y2='Bottom:Q',
-                color=alt.Color('Accom Type:N',
-                                scale=alt.Scale(
-                                    domain=accom_types,
-                                    range=[color_dict[ac] for ac in accom_types]),
-                                title='Accommodation Type'),
-                tooltip=['Age Band', 'Accom Type', 'Count']
-            ).properties(
-                width=300,
-                height=300,
-                title='Residents by Accom. Type and Age (Stacked)'
-            ).interactive()
-
-            st.altair_chart(stacked_chart, use_container_width=True)
+        st.altair_chart(stacked_chart, use_container_width=True)
+        st.caption("Note: The height of each bar is a density (count per unit age).")

@@ -145,24 +145,30 @@ class MSOA_Pop_summary(MSOAOutput):
             common = min(male_sum, female_sum)
             male_excess = male_sum - common
             female_excess = female_sum - common
-            # For male, values are negative.
+
+            # For males, values are negative.
+            # The common part goes from 0 to -common.
             data_rows.append({
                 'age_bin': label,
                 'sex': 'male',
                 'component': 'common',
-                'value': -common,
-                'abs_value': common,
+                'value': -common,  # endpoint of common
+                'abs_value': common,  # for tooltip if needed
                 'total': male_sum
             })
+            # For the excess part, start at -common and extend further left.
             data_rows.append({
                 'age_bin': label,
                 'sex': 'male',
                 'component': 'excess',
-                'value': -male_excess,
-                'abs_value': male_excess,
+                'baseline': -common,  # start at the end of the common segment
+                'value': -common - male_excess,  # extend further left
+                'excess': male_excess,  # absolute excess amount
                 'total': male_sum
             })
-            # For female, values are positive.
+
+            # For females, values are positive.
+            # The common part goes from 0 to common.
             data_rows.append({
                 'age_bin': label,
                 'sex': 'female',
@@ -171,12 +177,14 @@ class MSOA_Pop_summary(MSOAOutput):
                 'abs_value': common,
                 'total': female_sum
             })
+            # For the excess part, start at common and extend further right.
             data_rows.append({
                 'age_bin': label,
                 'sex': 'female',
                 'component': 'excess',
-                'value': female_excess,
-                'abs_value': female_excess,
+                'baseline': common,  # start at the end of the common segment
+                'value': common + female_excess,  # extend further right
+                'excess': female_excess,  # absolute excess amount
                 'total': female_sum
             })
         df_stack = pd.DataFrame(data_rows)
@@ -194,8 +202,8 @@ class MSOA_Pop_summary(MSOAOutput):
 
         df_stack['fill'] = df_stack.apply(fill_color, axis=1)
 
-        # Build the stacked bar chart.
-        chart = alt.Chart(df_stack).mark_bar().encode(
+        # Build the chart for the common component.
+        chart_common = alt.Chart(df_stack[df_stack.component == 'common']).mark_bar().encode(
             x=alt.X('value:Q',
                     title='Population',
                     axis=alt.Axis(labelExpr="abs(datum.value)")),
@@ -206,17 +214,55 @@ class MSOA_Pop_summary(MSOAOutput):
                     axis=alt.Axis(grid=True)),
             color=alt.Color('fill:N',
                             scale=alt.Scale(
-                                domain=['male_common', 'male_excess', 'female_common', 'female_excess'],
-                                range=['lightblue', 'darkblue', 'lightcoral', 'darkred']
-                            )),
-            # Tooltip now shows the total count (for that sex in the bin) regardless of the segment.
-            tooltip=['age_bin:N', 'sex:N', 'total:Q']
+                                domain=['male_common', 'female_common'],
+                                range=['lightblue', 'lightcoral']
+                            ),
+                            legend=alt.Legend(title="Component")),
+            tooltip=[
+                alt.Tooltip('age_bin:N', title='Age Bin'),
+                alt.Tooltip('sex:N', title='Sex'),
+                alt.Tooltip('total:Q', title='Total')
+            ]
         ).properties(
             width=400,
             height=400
         )
 
-        return chart
+        # Build the chart for the excess component.
+        # Use x and x2 to draw the bar starting at the baseline.
+        chart_excess = alt.Chart(df_stack[df_stack.component == 'excess']).mark_bar().encode(
+            x=alt.X('baseline:Q',
+                    title='Population',
+                    axis=alt.Axis(labelExpr="abs(datum.value)")),
+            x2='value:Q',
+            y=alt.Y('age_bin:N',
+                    title='Age',
+                    sort=bin_labels,
+                    scale=alt.Scale(reverse=True),
+                    axis=alt.Axis(grid=True)),
+            color=alt.Color('fill:N',
+                            scale=alt.Scale(
+                                domain=['male_excess', 'female_excess'],
+                                range=['darkblue', 'darkred']
+                            ),
+                            legend=alt.Legend(title="Component")),
+            tooltip=[
+                alt.Tooltip('age_bin:N', title='Age Bin'),
+                alt.Tooltip('sex:N', title='Sex'),
+                alt.Tooltip('total:Q', title='Total'),
+                alt.Tooltip('excess:Q', title='Excess Amount', format=".0f")
+            ]
+        ).properties(
+            width=400,
+            height=400
+        )
+
+        # Layer the two charts together.
+        layered_chart = alt.layer(chart_common, chart_excess).resolve_scale(
+            color='independent'
+        )
+
+        return layered_chart
 
 
 class MSOA_Communal(MSOAOutput):
