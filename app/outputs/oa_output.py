@@ -391,7 +391,7 @@ class OA_Communal(OAOutput):
             })
         df_chart = pd.DataFrame(data)
         chart = alt.Chart(df_chart).mark_bar().encode(
-            x=alt.X('Age Range:N', sort=age_cols, title='5-Year Age Band'),
+            x=alt.X('Age Range:N', sort=age_cols, title='Age Band'),
             y=alt.Y('Value:Q', title='Estimated Count'),
             tooltip=[alt.Tooltip('Age Range:N', title='Age Range'),
                      alt.Tooltip('Original:N', title='Count')]
