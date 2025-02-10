@@ -161,7 +161,7 @@ class MSOA_Pop_summary(MSOAOutput):
         df_single['age_bin'] = pd.cut(df_single['age'], bins=bins, right=False, labels=labels)
 
         # Group by age_bin and sum up male, female, and total counts.
-        df_bins = df_single.groupby('age_bin', as_index=False).sum()
+        df_bins = df_single.groupby('age_bin', as_index=False, observed=False).sum()
 
         # Compute the common count (shared by both sexes) and the excess for each.
         df_bins['common'] = df_bins[['male', 'female']].min(axis=1)

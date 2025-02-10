@@ -4,9 +4,61 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b43ffdd-c0ff-4ea3-ab8d-54194f22630b" name="Changes" comment="Vectorised pop pyramids and added data table tab">
+    <list default="true" id="3b43ffdd-c0ff-4ea3-ab8d-54194f22630b" name="Changes" comment="Graph Adjustments to population pyramids">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/East Midlands/age_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/East Midlands/custody_type_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/East Midlands/ethnicity_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/East Midlands/nationality_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/East Midlands/offence_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/East of England/age_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/East of England/custody_type_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/East of England/ethnicity_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/East of England/nationality_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/East of England/offence_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/London/age_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/London/custody_type_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/London/ethnicity_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/London/nationality_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/London/offence_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/North East/age_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/North East/custody_type_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/North East/ethnicity_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/North East/nationality_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/North East/offence_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/North West/age_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/North West/custody_type_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/North West/ethnicity_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/North West/nationality_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/North West/offence_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/South East/age_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/South East/custody_type_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/South East/ethnicity_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/South East/nationality_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/South East/offence_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/South West/age_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/South West/custody_type_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/South West/ethnicity_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/South West/nationality_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/South West/offence_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/West Midlands/age_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/West Midlands/custody_type_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/West Midlands/ethnicity_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/West Midlands/nationality_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/West Midlands/offence_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/Yorkshire and The Humber/age_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/Yorkshire and The Humber/custody_type_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/Yorkshire and The Humber/ethnicity_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/Yorkshire and The Humber/nationality_group_table.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions/Yorkshire and The Humber/offence_group_table.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/VirtUK.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/VirtUK.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/data_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/data_loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/outputs/msoa_output.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/outputs/msoa_output.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/outputs/oa_output.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/outputs/oa_output.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,9 +108,11 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Python.oa_output.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/callum_brown/Desktop/GitHub/VirtUK&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/callum_brown/Desktop/GitHub/VirtUK/app/data_2021/input/households/communal_establishments&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -70,9 +124,12 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments" />
+      <recent name="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/regions" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments" />
       <recent name="$PROJECT_DIR$/app/data_2021/input/households/communal_establishments/prisons" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/app.py" />
@@ -97,6 +154,9 @@
       <updated>1739013059545</updated>
       <workItem from="1739013060637" duration="1688000" />
       <workItem from="1739014824689" duration="18407000" />
+      <workItem from="1739099317098" duration="21670000" />
+      <workItem from="1739221867153" duration="14000" />
+      <workItem from="1739221891164" duration="5169000" />
     </task>
     <task id="LOCAL-00001" summary="First Upload">
       <option name="closed" value="true" />
@@ -250,7 +310,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739098299273</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Graph Adjustments to population pyramids">
+      <option name="closed" value="true" />
+      <created>1739099353779</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1739099353779</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -265,7 +333,11 @@
     <MESSAGE value="bug fix" />
     <MESSAGE value="Changed from logarithmic to linear y axis for OA bar charts due to rendering issues and also for ease of understanding." />
     <MESSAGE value="Added clearer comments to code." />
+    <MESSAGE value="Vectorised pop pyramids and added data table tab" />
     <MESSAGE value="Graph Adjustments to population pyramids" />
     <option name="LAST_COMMIT_MESSAGE" value="Graph Adjustments to population pyramids" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/VirtUK$oa_output.coverage" NAME="oa_output Coverage Results" MODIFIED="1739224342004" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/outputs" />
   </component>
 </project>

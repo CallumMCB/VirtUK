@@ -138,7 +138,7 @@ class Main:
                 if sub_map_data.get("last_object_clicked_tooltip"):
                     sub_tooltip = sub_map_data["last_object_clicked_tooltip"]
                     self.selected_oa_code = sub_tooltip.strip()
-                    print("Sub-map tooltip:", self.selected_oa_code)
+                    print("Sub-map tooltip:", self.selected_oa_code, self.selected_region_name)
 
         # --- Display Output Information in Columns ---
         msoa_oa_selector = st.popover("Select Area Information")
@@ -154,7 +154,7 @@ class Main:
                     st.write("MSOA Not Selected or not available")
             with col_right:
                 if self.selected_oa_code:
-                    self.oa_op.main_output(self.selected_oa_code)
+                    self.oa_op.main_output(self.selected_oa_code, self.selected_region_name)
                 else:
                     st.write("OA Not Selected or not available")
         elif show_msoa:
@@ -166,7 +166,7 @@ class Main:
         elif show_oa:
             # Only OA output is selected.
             if self.selected_oa_code:
-                self.oa_op.main_output(self.selected_oa_code)
+                self.oa_op.main_output(self.selected_oa_code, self.selected_region_name)
             else:
                 st.write("OA Not Selected or not available")
         else:
