@@ -6,8 +6,7 @@ import pandas as pd
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_PATH = os.path.join(BASE_DIR, "data_2021")
-
+DATA_PATH = os.path.abspath(os.path.join(BASE_DIR, "../data_2021"))
 
 class DataLoader:
     def __init__(self, regions=None):

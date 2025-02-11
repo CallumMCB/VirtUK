@@ -8,21 +8,22 @@ from pprint import pprint
 from outputs import MSOAOutput, OAOutput, CareOutput
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_PATH = os.path.join(BASE_DIR, "data_2021")
+DATA_PATH = os.path.abspath(os.path.join(BASE_DIR, "../data_2021"))
 
 class Main:
     def __init__(self):
         self.start_center = [54.5, -2.5]
         self.start_zoom = 6
         self.regions_file = os.path.join(DATA_PATH, 'input/geography/oa_msoa_lad_regions.csv')
+        print(self.regions_file)
         self.selected_oa_code = None
         self.selected_msoa_code = None
         self.selected_region_name = None
         self.main()
 
     def main(self):
-        st.set_page_config(page_title="PoppyPop & JUNE Map", layout="wide")
-        st.title("PoppyPop & JUNE Map (2021 Census Day)")
+        st.set_page_config(page_title="VirtUK Interactive Map", layout="wide")
+        st.title("VirtUK Interactive Map (2021 Census Day)")
 
         # --- Sidebar: Regions & Layer Options ---
         st.sidebar.header("Filters & Options")
