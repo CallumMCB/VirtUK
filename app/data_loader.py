@@ -223,7 +223,7 @@ class DataFilter:
                     ]
                     oa_codes = self.data_loader.df_filtered_hierarchy[region]['area'].unique()
                     msoa_codes = self.data_loader.df_filtered_hierarchy[region]['msoa'].unique()
-                    lad_codes = self.data_loader.df_filtered_hierarchy[region]['lad'].unique()
+                    lad_codes = self.data_loader.df_filtered_hierarchy[region]['lad_codes'].unique()
                     self.data_loader.oa_boundaries[region] = self.filter_dataframe(
                         self.data_loader.oa_boundaries[region], 'OA21CD', oa_codes
                     )
@@ -231,7 +231,7 @@ class DataFilter:
                         self.data_loader.msoa_boundaries[region], 'MSOA21CD', msoa_codes
                     )
                     self.data_loader.lad_boundaries[region] = self.filter_dataframe(
-                        self.data_loader.lad_boundaries[region], 'LAD24NM', lad_codes
+                        self.data_loader.lad_boundaries[region], 'LAD24CD', lad_codes
                     )
             else:
                 # In the default (non-region-specific) case, filter the single combined DataFrame.
@@ -240,7 +240,7 @@ class DataFilter:
                 ]
                 oa_codes = self.data_loader.df_filtered_hierarchy['area'].unique()
                 msoa_codes = self.data_loader.df_filtered_hierarchy['msoa'].unique()
-                lad_codes = self.data_loader.df_filtered_hierarchy['lad'].unique()
+                lad_codes = self.data_loader.df_filtered_hierarchy['lad_codes'].unique()
 
                 self.data_loader.oa_boundaries = self.filter_dataframe(
                     self.data_loader.oa_boundaries, 'OA21CD', oa_codes
@@ -249,7 +249,7 @@ class DataFilter:
                     self.data_loader.msoa_boundaries, 'MSOA21CD', msoa_codes
                 )
                 self.data_loader.lad_boundaries = self.filter_dataframe(
-                    self.data_loader.lad_boundaries, 'LAD24NM', lad_codes
+                    self.data_loader.lad_boundaries, 'LAD24CD', lad_codes
                 )
 
     @staticmethod
