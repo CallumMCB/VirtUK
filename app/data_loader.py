@@ -223,7 +223,7 @@ class DataFilter:
                     ]
                     oa_codes = self.data_loader.df_filtered_hierarchy[region]['area'].unique()
                     msoa_codes = self.data_loader.df_filtered_hierarchy[region]['msoa'].unique()
-                    lad_codes = self.data_loader.df_filtered_hierarchy[region]['lad_codes'].unique()
+                    lad_codes = self.data_loader.df_filtered_hierarchy[region]['lad_code'].unique()
                     self.data_loader.oa_boundaries[region] = self.filter_dataframe(
                         self.data_loader.oa_boundaries[region], 'OA21CD', oa_codes
                     )
@@ -240,7 +240,7 @@ class DataFilter:
                 ]
                 oa_codes = self.data_loader.df_filtered_hierarchy['area'].unique()
                 msoa_codes = self.data_loader.df_filtered_hierarchy['msoa'].unique()
-                lad_codes = self.data_loader.df_filtered_hierarchy['lad_codes'].unique()
+                lad_codes = self.data_loader.df_filtered_hierarchy['lad_code'].unique()
 
                 self.data_loader.oa_boundaries = self.filter_dataframe(
                     self.data_loader.oa_boundaries, 'OA21CD', oa_codes
