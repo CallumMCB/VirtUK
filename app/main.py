@@ -9,6 +9,11 @@ from outputs import MSOAOutput, OAOutput, CareOutput
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.abspath(os.path.join(BASE_DIR, "../data_2021"))
+df_regions = pd.read_csv(os.path.join(DATA_PATH, 'input/geography/oa_msoa_lad_regions.csv'))
+df_lad_lookup = pd.read_csv(os.path.join(DATA_PATH, 'input/geography/lad_lookup.csv'))
+df_lad_lookup.set_index('lad_code', inplace=True)
+df_msoa_lookup = pd.read_csv(os.path.join(DATA_PATH, 'input/geography/msoa_lookup.csv'))
+df_msoa_lookup.set_index('msoa', inplace=True)
 
 class Main:
     def __init__(self):
@@ -18,7 +23,6 @@ class Main:
         self.selected_msoa_code = None
         self.selected_LAD_code = None
         self.selected_region_name = None
-        df_lad_lookup = None
         self.main()
 
     def main(self):
@@ -32,14 +36,11 @@ class Main:
         unique_regions = []  # Default empty list
         selected_regions = []  # Default empty list
 
-        df_regions = pd.read_csv(os.path.join(DATA_PATH, 'input/geography/oa_msoa_lad_regions.csv'))
         unique_regions = df_regions['region'].dropna().unique().tolist()
         unique_regions = [region for region in unique_regions if region != 'Wales']
         selected_regions = st.sidebar.multiselect("Select Regions", options=unique_regions, default=['North East'])
         regions = selected_regions if selected_regions else None
 
-        df_lad_lookup = pd.read_csv(os.path.join(DATA_PATH, 'input/geography/lad_lookup.csv'))
-        df_lad_lookup.set_index('lad_code', inplace=True)
 
         # --- Load and Process Data (cached) ---
         data_loader = load_all_data(unique_regions, regions)
@@ -91,7 +92,7 @@ class Main:
         if self.selected_LAD_code:
             with self.submpcol1:
                 selected_lad_name = df_lad_lookup.loc[self.selected_LAD_code, 'lad']
-                st.subheader(f"Map of {selected_lad_name}")
+                st.subheader(f"Map of LAD: {selected_lad_name}")
                 lad_map_data = st_folium(
                     create_lad_map(
                         data_loader,
@@ -112,7 +113,8 @@ class Main:
         # --- Display Sub-Map (MSOA Individual Map) in Column 2 ---
         if self.selected_msoa_code:
             with self.submpcol2:
-                st.subheader("MSOA Individual Map")
+                selected_msoa_name = df_msoa_lookup.loc[self.selected_msoa_code, 'msoa_name']
+                st.subheader(f"Map of MSOA: {selected_msoa_name}")
                 msoa_map_data = st_folium(
                     create_msoa_map(
                     data_loader,
@@ -120,8 +122,9 @@ class Main:
                     self.start_center,
                     self.start_zoom,
                     self.selected_region_name,
-                    self.selected_LAD_code,
-                    self.selected_msoa_code
+                    selected_lad_name,
+                    self.selected_msoa_code,
+                    selected_msoa_name
                 ), width=700, height=450)
                 pprint(msoa_map_data)
 

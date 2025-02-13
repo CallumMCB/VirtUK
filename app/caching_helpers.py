@@ -20,5 +20,5 @@ def create_map(data_loader, layer_options, center, zoom):
 def create_lad_map(data_loader, layer_options, center, zoom, region, lad, lad_name):
     return get_LAD_map(data_loader, layer_options, center, zoom, region, lad, lad_name)
 
-def create_msoa_map(data_loader, layer_options, center, zoom, region, lad, msoa):
-    return get_msoa_map(data_loader, layer_options, center, zoom, region, lad, msoa)
+def create_msoa_map(data_loader, layer_options, center, zoom, region, lad, msoa, msoa_name):
+    return get_msoa_map(data_loader, layer_options, center, zoom, region, lad, msoa, msoa_name)

@@ -6,7 +6,7 @@ from object_identifiers import CareLocations
 import streamlit as st
 
 class MSOAPlotter:
-    def __init__(self, data_loader, layer_options=None, center=None, zoom=None, selected_region=None, selected_LAD=None, selected_msoa=None):
+    def __init__(self, data_loader, layer_options=None, center=None, zoom=None, selected_region=None, selected_LAD=None, selected_msoa=None, selected_msoa_name=None):
         """
         If selected_msoa (and selected_region) are provided, the map will only show the selected MSOA
         boundary and its output area (OA) boundaries.
@@ -25,6 +25,7 @@ class MSOAPlotter:
         self.selected_region = selected_region
         self.selected_LAD = selected_LAD
         self.selected_msoa = selected_msoa
+        self.selected_msoa_name = selected_msoa_name
         self.create_map()
 
     def create_map(self):
@@ -52,7 +53,7 @@ class MSOAPlotter:
         gdf_oa = self.data_loader.oa_boundaries.get(self.selected_region)
 
         selected_msoa = gdf_oa[gdf_oa['OA21CD'].isin(oa_codes)]
-        single_msoa_layer = folium.FeatureGroup(name=f"Output Areas for MSOA {self.selected_msoa}")
+        single_msoa_layer = folium.FeatureGroup(name=f"Output Area Boundaries")
         for _, row in tqdm(selected_msoa.iterrows(),
                            total=selected_msoa.shape[0],
                            desc="Adding OA Boundaries for selected MSOA",
@@ -60,7 +61,7 @@ class MSOAPlotter:
             properties = {
                 "Region": self.selected_region,
                 "LAD": self.selected_LAD,
-                "MSOA": self.selected_msoa,
+                "MSOA": self.selected_msoa_name,
                 "OA": row["OA21CD"],
             }
             feature = {
@@ -100,7 +101,7 @@ class MSOAPlotter:
             content += f"<div><strong>{key}:</strong> {value}</div>"
         return content
 
-def get_msoa_map(data_loader, layer_options, center, zoom, selected_region=None, selected_LAD=None, selected_msoa=None):
+def get_msoa_map(data_loader, layer_options, center, zoom, selected_region=None, selected_LAD=None, selected_msoa=None, selected_msoa_name=None):
     mp = MSOAPlotter(data_loader, layer_options=layer_options, center=center, zoom=zoom,
-                      selected_region=selected_region, selected_LAD=selected_LAD, selected_msoa=selected_msoa)
+                      selected_region=selected_region, selected_LAD=selected_LAD, selected_msoa=selected_msoa, selected_msoa_name=selected_msoa_name)
     return mp.map

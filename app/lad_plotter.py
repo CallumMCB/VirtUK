@@ -1,9 +1,14 @@
+import os
 import folium
+import pandas as pd
 from folium.plugins import MarkerCluster
 from tqdm import tqdm
 from shapely.geometry import mapping
 from object_identifiers import CareLocations
 import streamlit as st
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_PATH = os.path.abspath(os.path.join(BASE_DIR, "../data_2021"))
 
 class LADPlotter:
     def __init__(self, data_loader, layer_options=None, center=None, zoom=None, selected_region=None, selected_LAD=None, selected_LAD_name=None):
@@ -25,6 +30,8 @@ class LADPlotter:
         self.selected_region = selected_region
         self.selected_LAD = selected_LAD
         self.selected_LAD_name = selected_LAD_name
+        msoa_naming = pd.read_csv(f'{DATA_PATH}/input/geography/msoa_lookup.csv')
+        self.msoa_naming = msoa_naming.set_index('msoa')
         self.create_map()
 
     def create_map(self):
@@ -48,7 +55,7 @@ class LADPlotter:
         gdf_msoa = self.data_loader.msoa_boundaries.get(self.selected_region)
 
         selected_LAD = gdf_msoa[gdf_msoa['MSOA21CD'].isin(msoa_codes)]
-        single_LAD_layer = folium.FeatureGroup(name=f"Output Areas for MSOA {self.selected_LAD}")
+        single_LAD_layer = folium.FeatureGroup(name=f"MSOA Boundaries")
         for _, row in tqdm(selected_LAD.iterrows(),
                            total=selected_LAD.shape[0],
                            desc="Adding MSOA Boundaries for selected LAD",
@@ -56,7 +63,8 @@ class LADPlotter:
             properties = {
                 "Region": self.selected_region,
                 "LAD": self.selected_LAD_name,
-                "MSOA": row["MSOA21CD"],
+                "MSOA Name": self.msoa_naming.loc[row["MSOA21CD"], 'msoa_name'],
+                "MSOA Code": row["MSOA21CD"],
             }
             feature = {
                 "type": "Feature",
@@ -77,8 +85,8 @@ class LADPlotter:
             gj.add_child(folium.Popup(popup_content, max_width=450))
             gj.add_child(
                 folium.GeoJsonTooltip(
-                    fields=["Region", "LAD", "MSOA"],
-                    aliases=["Region:", "LAD Code:", "MSOA:"],
+                    fields=["Region", "LAD", "MSOA Name", "MSOA Code" ],
+                    aliases=["Region:", "LAD Name:", "MSOA Name:", "MSOA Code:"],
                     labels=False
                 )
             )
