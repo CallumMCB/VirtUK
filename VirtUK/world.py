@@ -4,8 +4,7 @@ from VirtUK.demography import Demography, Population
 from VirtUK.distributors import (
     SchoolDistributor,
     HospitalDistributor,
-    HouseholdDistributor,
-    CareHomeDistributor,
+    ResidenceDistributor,
     WorkerDistributor,
     CompanyDistributor,
     UniversityDistributor,
@@ -80,7 +79,7 @@ class World:
                 ret.append(attr_value)
         return iter(ret)
 
-    def distribute_people(self, include_households=True):
+    def distribute_people(self, include_residences=True):
         """
         Distributes people to buildings assuming default configurations.
         """
@@ -96,16 +95,16 @@ class World:
             worker_distr.distribute(
                 areas=self.areas, super_areas=self.super_areas, population=self.people
             )
-        if self.care_homes is not None:
-            carehome_distr = CareHomeDistributor.from_file()
-            carehome_distr.populate_care_homes_in_super_areas(
-                super_areas=self.super_areas
-            )
+        # if self.care_homes is not None:
+        #     carehome_distr = CareHomeDistributor.from_file()
+        #     carehome_distr.populate_care_homes_in_super_areas(
+        #         super_areas=self.super_areas
+        #     )
 
-        if include_households:
-            household_distributor = HouseholdDistributor.from_data_loader()
+        if include_residences:
+            residence_distributor = ResidenceDistributor.from_data_loader()
             self.households = (
-                household_distributor.distribute_people_and_households_to_areas(
+                residence_distributor.distribute_people_and_residences_to_areas(
                     self.lads
                 )
             )
@@ -123,11 +122,11 @@ class World:
             uni_distributor.distribute_students_to_universities(
                 areas=self.areas, people=self.people
             )
-        if self.care_homes is not None:
-            # this goes after unis to ensure students go to uni
-            carehome_distr.distribute_workers_to_care_homes(
-                super_areas=self.super_areas
-            )
+        # if self.care_homes is not None:
+        #     # this goes after unis to ensure students go to uni
+        #     carehome_distr.distribute_workers_to_care_homes(
+        #         super_areas=self.super_areas
+        #     )
 
         if self.hospitals is not None:
             hospital_distributor = HospitalDistributor.from_file(self.hospitals)
@@ -166,7 +165,7 @@ class World:
 def generate_world_from_geography(
     geography: Geography,
     demography: Optional[Demography] = None,
-    include_households=True,
+    include_residences=True,
     ethnicity=True,
     comorbidity=True,
 ):
@@ -186,6 +185,6 @@ def generate_world_from_geography(
         geography_group = getattr(geography, possible_group)
         if geography_group is not None:
             setattr(world, possible_group, geography_group)
-    world.distribute_people(include_households=include_households)
+    world.distribute_people(include_residences=include_residences)
     world.cemeteries = Cemeteries()
     return world

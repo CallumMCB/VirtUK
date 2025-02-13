@@ -1,99 +1,120 @@
-Name,Description,Value
-Altcourse,70 and over,16
-Ashfield,70 and over,48
-Askham Grange,70 and over,*
-Bedford,70 and over,*
-Belmarsh,70 and over,6
-Berwyn,70 and over,15
-Birmingham,70 and over,13
-Bristol,70 and over,3
-Brixton,70 and over,13
-Bronzefield,70 and over,5
-Buckley Hall,70 and over,*
-Bullingdon,70 and over,15
-Bure,70 and over,80
-Cardiff,70 and over,*
-Channings Wood,70 and over,21
-Chelmsford,70 and over,6
-Coldingley,70 and over,5
-Dartmoor,70 and over,65
-Doncaster,70 and over,24
-Dovegate,70 and over,7
-Downview,70 and over,*
-Durham,70 and over,9
-Eastwood Park,70 and over,*
-Elmley (Sheppey cluster),70 and over,16
-Erlestoke,70 and over,3
-Exeter,70 and over,4
-Featherstone,70 and over,*
-Ford,70 and over,6
-Forest Bank,70 and over,14
-Foston Hall,70 and over,*
-Frankland,70 and over,42
-Full Sutton,70 and over,17
-Garth,70 and over,12
-Gartree,70 and over,16
-Grendon/Spring Hill,70 and over,5
-Guys Marsh,70 and over,3
-Hatfield,70 and over,*
-Haverigg,70 and over,26
-Hewell,70 and over,13
-High Down,70 and over,18
-Highpoint (North and South),70 and over,8
-Hollesley Bay,70 and over,*
-Holme House,70 and over,17
-Hull,70 and over,39
-Isle of Wight,70 and over,23
-Kirkham,70 and over,*
-Lancaster Farms,70 and over,*
-Leeds,70 and over,15
-Leicester,70 and over,*
-Lewes,70 and over,10
-Leyhill,70 and over,46
-Lincoln,70 and over,10
-Lindholme,70 and over,3
-Littlehey,70 and over,127
-Liverpool,70 and over,15
-Long Lartin,70 and over,11
-Lowdham Grange,70 and over,4
-Maidstone,70 and over,*
-Manchester,70 and over,6
-Moorland,70 and over,41
-Mount,70 and over,3
-New Hall,70 and over,4
-North Sea Camp,70 and over,19
-Northumberland,70 and over,36
-Norwich,70 and over,18
-Nottingham,70 and over,3
-Oakwood,70 and over,53
-Onley,70 and over,*
-Parc,70 and over,51
-Pentonville,70 and over,8
-Peterborough (Female),70 and over,*
-Peterborough (Male),70 and over,6
-Prescoed,70 and over,*
-Preston,70 and over,10
-Risley,70 and over,25
-Rochester,70 and over,4
-Rye Hill,70 and over,51
-Send,70 and over,*
-Stafford,70 and over,79
-Standford Hill (Sheppey cluster),70 and over,5
-Stocken,70 and over,3
-Stoke Heath,70 and over,*
-Styal,70 and over,*
-Sudbury,70 and over,*
-Swaleside (Sheppey cluster),70 and over,22
-Thameside,70 and over,6
-Usk,70 and over,18
-Wakefield,70 and over,46
-Wandsworth,70 and over,6
-Warren Hill,70 and over,*
-Wayland,70 and over,7
-Wealstun,70 and over,*
-Whatton,70 and over,58
-Whitemoor,70 and over,3
-Winchester,70 and over,8
-Wormwood Scrubs,70 and over,7
-Wymott,70 and over,66
-zzz The Verne IRC/HMP (Aug 18-),70 and over,78
+Name,15 - 17,18 - 20,21 - 24,25 - 29,30 - 39,40 - 49,50 - 59,60 - 69,70 and over,area,msoa
+Altcourse,*,75,98,186,420,220,90,25,16,E00176728,E02001351
+Ashfield,*,*,5,30,111,72,79,54,48,E00189531,E02003108
+Askham Grange,*,*,4,8,20,17,20,10,*,E00067761,E02002782
+Aylesbury,*,209,44,*,*,*,*,*,*,E00178390,E02003665
+Bedford,*,47,46,76,111,61,19,*,*,E00183502,E02003625
+Belmarsh,*,99,104,130,177,98,42,20,6,E00176530,E02000314
+Berwyn,*,42,171,351,663,368,152,42,15,W00010468,W02000425
+Birmingham,*,*,148,184,380,165,61,18,13,E00175650,E02001879
+Brinsford,*,316,99,*,*,*,*,*,*,E00171615,E02006179
+Bristol,*,30,49,74,168,101,43,17,3,E00073274,E02003027
+Brixton,*,*,55,136,206,130,92,32,13,E00177601,E02000638
+Bronzefield,*,12,42,68,176,129,43,13,5,E00156619,E02006405
+Buckley Hall,*,*,*,61,179,94,58,30,*,E00172363,E02001136
+Bullingdon,*,74,145,176,349,192,84,34,15,E00169031,E02005936
+Bure,*,*,27,56,150,111,106,85,80,E00169872,E02005581
+Cardiff,*,25,81,121,237,130,39,*,*,W00009982,W02000402
+Channings Wood,*,*,78,124,209,116,90,44,21,E00165900,E02004213
+Chelmsford,*,76,100,131,211,97,51,7,6,E00109852,E02006978
+Coldingley,*,*,37,93,168,84,45,11,5,E00167820,E02006421
+Cookham Wood,74,12,*,*,*,*,*,*,*,E00167420,E02003337
+Dartmoor,*,*,40,76,182,111,93,51,65,E00180228,E02004231
+Deerbolt,*,157,114,*,*,*,*,*,*,E00183312,E02007022
+Doncaster,*,145,126,177,348,198,69,47,24,E00038161,E02001560
+Dovegate,*,*,125,207,437,254,107,21,7,E00168365,E02006136
+Downview,*,*,22,37,82,33,32,5,*,E00170403,E02006376
+Drake Hall,*,4,14,35,92,75,35,14,*,E00151321,E02006192
+Durham,*,60,98,178,348,172,59,17,9,E00171869,E02004314
+East Sutton Park,*,*,4,8,24,17,16,7,*,E00123682,E02005084
+Eastwood Park,*,*,26,54,157,79,31,13,*,E00075710,E02003090
+Elmley (Sheppey cluster),*,62,122,197,375,187,114,30,16,E00189650,E02005120
+Erlestoke,*,22,39,62,154,81,53,17,3,E00184186,E02006639
+Exeter,*,23,46,66,145,85,31,10,4,E00180166,E02004152
+Featherstone,*,*,83,125,250,133,57,*,*,E00171615,E02006179
+Feltham,53,136,29,*,*,*,*,*,*,E00179152,E02000552
+Ford,*,*,22,59,138,87,56,16,6,E00184735,E02006547
+Forest Bank,*,111,147,222,472,189,83,17,14,E00172963,E02001164
+Foston Hall,*,*,21,34,101,60,22,8,*,E00100526,E02004118
+Frankland,*,*,51,73,252,150,163,88,42,E00183299,E02004308
+Full Sutton,*,*,27,64,188,133,91,47,17,E00175339,E02002692
+Garth,*,*,80,133,285,146,99,37,12,E00170510,E02005195
+Gartree,*,*,24,80,182,128,103,59,16,E00187479,E02005373
+Grendon/Spring Hill,*,*,15,51,133,116,64,19,5,E00169125,E02003661
+Guys Marsh,*,*,50,99,170,85,40,12,3,E00183057,E02004259
+Hatfield,*,*,19,52,115,56,31,*,*,E00038290,E02001546
+Haverigg,*,*,3,15,69,56,88,46,26,E00097466,E02004007
+Hewell,*,*,110,159,355,169,60,22,13,E00181370,E02006709
+High Down,*,17,107,229,408,233,106,47,18,E00170403,E02006376
+Highpoint (North and South),*,*,112,257,465,255,120,36,8,E00169948,E02006283
+Hindley,*,119,91,87,166,59,26,3,*,E00181441,E02001312
+Hollesley Bay,*,*,16,59,139,83,61,25,*,E00173886,E02006293
+Holme House,*,16,99,211,432,232,105,39,17,E00174165,E02002544
+Hull,*,81,86,141,333,177,104,54,39,E00170747,E02002671
+Humber,*,*,117,186,343,204,81,14,*,E00185508,E02002709
+Huntercombe,*,*,42,92,158,107,23,6,*,E00186049,E02005968
+Isis,*,128,382,74,*,*,*,*,*,E00176530,E02000314
+Isle of Wight,*,*,36,80,183,121,128,75,23,E00172713,E02003588
+Kirkham,*,*,29,91,174,115,66,*,*,E00174064,E02005205
+Kirklevington Grange,*,*,13,14,61,51,27,11,*,E00174174,E02002558
+Lancaster Farms,*,*,70,117,193,108,29,*,*,E00185618,E02005233
+Leeds,*,*,147,196,419,226,81,21,15,E00170041,E02002400
+Leicester,*,*,37,68,101,52,13,*,*,E00068911,E02006850
+Lewes,*,27,56,99,179,87,59,19,10,E00106857,E02004383
+Leyhill,*,*,*,*,91,97,118,79,46,E00173069,E02003092
+Lincoln,*,40,77,112,239,124,45,15,10,E00173653,E02005444
+Lindholme,*,*,87,198,337,182,79,27,3,E00172382,E02001546
+Littlehey,*,*,43,94,251,233,236,188,127,E00173794,E02003769
+Liverpool,*,*,87,150,286,160,91,15,15,E00182973,E02001349
+Long Lartin,*,*,41,81,145,115,72,27,11,E00171600,E02006758
+Low Newton,*,5,17,25,113,59,21,9,*,E00183266,E02004308
+Lowdham Grange,*,*,87,178,331,174,90,23,4,E00173435,E02005905
+Maidstone,*,*,88,144,185,108,30,*,*,E00186663,E02005071
+Manchester,*,10,66,128,221,116,70,14,6,E00175942,E02006915
+Moorland,*,25,97,152,292,170,92,59,41,E00172382,E02001546
+Mount,*,*,120,222,376,208,74,25,3,E00189378,E02004876
+New Hall,*,10,21,52,135,79,29,5,4,E00168748,E02002472
+North Sea Camp,*,*,4,15,68,73,87,45,19,E00185354,E02005417
+Northumberland,*,*,90,233,493,252,135,81,36,E00190044,E02005720
+Norwich,*,42,70,124,259,127,54,17,18,E00187940,E02005587
+Nottingham,*,101,87,169,274,128,70,17,3,E00173486,E02002874
+Oakwood,*,*,182,355,692,441,235,100,53,E00171615,E02006179
+Onley,*,*,74,193,264,116,60,*,*,E00169204,E02005621
+Parc,17,92,193,274,542,268,139,49,51,W00010385,W02000228
+Pentonville,*,96,167,216,296,170,77,21,8,E00013494,E02000568
+Peterborough (Female),*,11,39,36,116,74,31,*,*,E00187639,E02003246
+Peterborough (Male),*,69,109,163,263,145,57,21,6,E00187639,E02003246
+Portland,*,56,96,90,143,93,21,6,*,E00171471,E02004288
+Prescoed,*,*,16,41,78,44,44,8,*,W00008311,W02000341
+Preston,*,43,80,122,242,118,45,19,10,E00181968,E02005266
+Ranby,*,*,120,196,354,222,59,21,*,E00142851,E02005837
+Risley,*,*,113,164,302,174,106,52,25,E00188925,E02002590
+Rochester,*,39,103,138,233,106,44,13,4,E00167420,E02003337
+Rye Hill,*,*,16,46,175,115,138,78,51,E00169203,E02005621
+Send,*,*,*,20,70,34,27,11,*,E00155365,E02006344
+Stafford,*,*,21,64,144,136,146,120,79,E00179354,E02006196
+Standford Hill (Sheppey cluster),*,7,24,66,166,97,71,22,5,E00124937,E02005120
+Stocken,*,*,103,193,381,216,97,25,3,E00172628,E02002863
+Stoke Heath,*,13,82,122,267,140,71,*,*,E00187256,E02006020
+Styal,*,*,27,54,138,92,40,9,*,E00174371,E02003859
+Sudbury,*,*,52,107,193,128,54,15,*,E00174335,E02004077
+Swaleside (Sheppey cluster),*,*,89,223,313,184,107,33,22,E00124937,E02005120
+Swansea,*,*,47,71,114,77,22,*,*,W00003997,W02000192
+Swinfen Hall,*,243,234,74,*,*,*,*,*,E00180753,E02006157
+Thameside,*,98,158,237,371,192,114,33,6,E00008406,E02000314
+Thorn Cross,*,*,28,42,135,78,34,*,*,E00062779,E02002613
+Usk,*,*,8,21,54,45,51,30,18,W00008311,W02000341
+Wakefield,*,*,14,56,184,151,163,96,46,E00179981,E02002456
+Wandsworth,*,74,124,218,487,291,128,32,6,E00183128,E02000946
+Warren Hill,*,*,*,16,62,68,74,29,*,E00173886,E02006293
+Wayland,*,*,90,179,325,178,91,19,7,E00169902,E02005512
+Wealstun,*,*,121,180,270,162,54,*,*,E00170593,E02002331
+Werrington,75,7,*,*,*,*,*,*,*,E00151745,E02006212
+Wetherby,116,31,*,*,*,*,*,*,*,E00059025,E02002331
+Whatton,*,*,40,72,193,155,163,121,58,E00144559,E02005906
+Whitemoor,*,*,31,38,100,71,46,18,3,E00187623,E02003746
+Winchester,*,36,57,77,158,84,44,11,8,E00184857,E02004833
+Woodhill,*,6,72,122,174,87,39,7,*,E00183648,E02007016
+Wormwood Scrubs,*,95,150,214,349,220,83,20,7,E00183098,E02000372
+Wymott,*,5,45,116,332,193,160,94,66,E00170510,E02005195
+zzz The Verne IRC/HMP (Aug 18-),*,*,9,24,94,110,145,105,78,E00171474,E02004288

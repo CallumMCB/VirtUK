@@ -52,7 +52,11 @@ class OAOutput:
         version instead.
         """
         df = dataset[self.region]
-        return df.loc[df['area'] == self.oa].copy()
+        df.reset_index(inplace=True)
+        df.set_index('area', inplace=True)
+        if self.oa in df.index:
+            return df.loc[self.oa].copy()
+        else: return pd.DataFrame()
 
     def display_other(self, tab):
         with tab:
@@ -98,7 +102,7 @@ class OA_Pop_summary(OAOutput):
 
         # Assume the five-year DataFrame has one column with the OA code (e.g. "area")
         # and then one column per 5‑year band.
-        five_year_bands = list( self.five_year_df.columns)
+        five_year_bands = list(pd.DataFrame(self.five_year_df).T.columns.drop('index'))
         if 'area' in five_year_bands:
             five_year_bands.remove('area')
         # Sort the five-year bands in ascending order (based on the first number)
@@ -139,7 +143,7 @@ class OA_Pop_summary(OAOutput):
         five_year_props = five_year_props.div(five_year_props.sum(axis=0), axis=1).fillna(0)
 
         # --- Estimate Counts ---
-        pop_data =  self.five_year_df.iloc[0][five_year_bands]
+        pop_data =  self.five_year_df[five_year_bands]
         estimated_counts = five_year_props.multiply(pop_data, axis=1)
 
         # Compute student and non-student counts.
@@ -212,70 +216,72 @@ class OA_Communal(OAOutput):
             OA_Communal.prisons(self)
 
     def prisons(self):
-        with st.expander("Prison Data"):
-            # Assuming self.prisons_df is a DataFrame with a "Prison" column.
-            self.prisons_df.set_index("Prison", inplace=True)
-            st.write("**ONS 2021 Census Recording**")
-            st.dataframe(self.prisons_df)
-            st.caption("The 'total communal residents' and the 'prison service' values relate to the total number of communal residents in the output area and the total number of residents in the prison service in the msoa respectively."
-                       "\nOne will note that this number is often significantly lower than recorded by the prison service itself (below). This is due to the fact that the Census only registers those residing here for >12 months.")
+        if not self.prisons_df.empty:
+            with st.expander("Prison Data"):
+                # Assuming self.prisons_df is a DataFrame with a "Prison" column.
+                print(tabulate(self.prisons_df.head(20), headers="keys", tablefmt="psql"))
+                self.prisons_df.set_index("Prison", inplace=True)
+                st.write("**ONS 2021 Census Recording**")
+                st.dataframe(self.prisons_df)
+                st.caption("The 'total communal residents' and the 'prison service' values relate to the total number of communal residents in the output area and the total number of residents in the prison service in the msoa respectively."
+                           "\nOne will note that this number is often significantly lower than recorded by the prison service itself (below). This is due to the fact that the Census only registers those residing here for >12 months.")
 
-            # Get the processed prisons actual dictionary for the current region.
-            prisons_actual = self.data.df_prisons_actual[self.region]
+                # Get the processed prisons actual dictionary for the current region.
+                prisons_actual = self.data.df_prisons_actual[self.region]
 
-            # --- Age Group Charts ---
-            st.write("**Age Group Data**")
-            age_group_df = prisons_actual['age_group']
-            # Filter to the current output area.
-            age_group_df = age_group_df[age_group_df['area'] == self.oa]
-            age_cols = ["15 - 17", "18 - 20", "21 - 24", "25 - 29", "30 - 39",
-                        "40 - 49", "50 - 59", "60 - 69", "70 and over"]
-            for idx, row in age_group_df.iterrows():
-                chart = OA_Communal.create_prison_age_group_chart(self, row, age_cols)
-                st.altair_chart(chart, use_container_width=True)
+                # --- Age Group Charts ---
+                st.write("**Age Group Data**")
+                age_group_df = prisons_actual['age_group']
+                # Filter to the current output area.
+                age_group_df = age_group_df[age_group_df['area'] == self.oa]
+                age_cols = ["15 - 17", "18 - 20", "21 - 24", "25 - 29", "30 - 39",
+                            "40 - 49", "50 - 59", "60 - 69", "70 and over"]
+                for idx, row in age_group_df.iterrows():
+                    chart = OA_Communal.create_prison_age_group_chart(self, row, age_cols)
+                    st.altair_chart(chart, use_container_width=True)
 
-            # --- Custody Type Data (Display as Table) ---
-            st.write("**Custody Type Data**")
-            custody_df = prisons_actual['custody_type']
-            custody_df = custody_df[custody_df['area'] == self.oa]
-            st.dataframe(custody_df)
+                # --- Custody Type Data (Display as Table) ---
+                st.write("**Custody Type Data**")
+                custody_df = prisons_actual['custody_type']
+                custody_df = custody_df[custody_df['area'] == self.oa]
+                st.dataframe(custody_df)
 
-            # --- Nationality Group Data (Display as Table) ---
-            st.write("**Nationality Group Data**")
-            nationality_df = prisons_actual['nationality_group']
-            nationality_df = nationality_df[nationality_df['area'] == self.oa]
-            st.dataframe(nationality_df)
+                # --- Nationality Group Data (Display as Table) ---
+                st.write("**Nationality Group Data**")
+                nationality_df = prisons_actual['nationality_group']
+                nationality_df = nationality_df[nationality_df['area'] == self.oa]
+                st.dataframe(nationality_df)
 
-            # --- Offence Group Pie Chart with Tabs ---
-            st.write("**Offence Group Data**")
-            offence_df = prisons_actual['offence_group']
-            offence_df = offence_df[offence_df['area'] == self.oa]
-            offence_cols = [col for col in offence_df.columns if col not in ['area', 'msoa', 'Name']]
-            for idx, row in offence_df.iterrows():
-                # Here we request the underlying data to be returned.
-                pie_chart, underlying_df = OA_Communal.create_prison_pie_chart(self, row, offence_cols,
-                                                title=f"Offence Distribution for {row.get('Name', 'Unknown')}",
-                                                return_data=True)
-                chart_tab, data_tab = st.tabs(["Chart", "Data"])
-                with chart_tab:
-                    st.altair_chart(pie_chart, use_container_width=True)
-                with data_tab:
-                    st.dataframe(underlying_df)
+                # --- Offence Group Pie Chart with Tabs ---
+                st.write("**Offence Group Data**")
+                offence_df = prisons_actual['offence_group']
+                offence_df = offence_df[offence_df['area'] == self.oa]
+                offence_cols = [col for col in offence_df.columns if col not in ['area', 'msoa', 'Name']]
+                for idx, row in offence_df.iterrows():
+                    # Here we request the underlying data to be returned.
+                    pie_chart, underlying_df = OA_Communal.create_prison_pie_chart(self, row, offence_cols,
+                                                    title=f"Offence Distribution for {row.get('Name', 'Unknown')}",
+                                                    return_data=True)
+                    chart_tab, data_tab = st.tabs(["Chart", "Data"])
+                    with chart_tab:
+                        st.altair_chart(pie_chart, use_container_width=True)
+                    with data_tab:
+                        st.dataframe(underlying_df)
 
-            # --- Ethnicity Group Pie Chart with Tabs ---
-            st.write("**Ethnicity Group Data**")
-            ethnicity_df = prisons_actual['ethnicity_group']
-            ethnicity_df = ethnicity_df[ethnicity_df['area'] == self.oa]
-            ethnicity_cols = [col for col in ethnicity_df.columns if col not in ['area', 'msoa', 'Name']]
-            for idx, row in ethnicity_df.iterrows():
-                pie_chart, underlying_df = OA_Communal.create_prison_pie_chart(self, row, ethnicity_cols,
-                                                title=f"Ethnicity Distribution for {row.get('Name', 'Unknown')}",
-                                                return_data=True)
-                chart_tab, data_tab = st.tabs(["Chart", "Data"])
-                with chart_tab:
-                    st.altair_chart(pie_chart, use_container_width=True)
-                with data_tab:
-                    st.dataframe(underlying_df)
+                # --- Ethnicity Group Pie Chart with Tabs ---
+                st.write("**Ethnicity Group Data**")
+                ethnicity_df = prisons_actual['ethnicity_group']
+                ethnicity_df = ethnicity_df[ethnicity_df['area'] == self.oa]
+                ethnicity_cols = [col for col in ethnicity_df.columns if col not in ['area', 'msoa', 'Name']]
+                for idx, row in ethnicity_df.iterrows():
+                    pie_chart, underlying_df = OA_Communal.create_prison_pie_chart(self, row, ethnicity_cols,
+                                                    title=f"Ethnicity Distribution for {row.get('Name', 'Unknown')}",
+                                                    return_data=True)
+                    chart_tab, data_tab = st.tabs(["Chart", "Data"])
+                    with chart_tab:
+                        st.altair_chart(pie_chart, use_container_width=True)
+                    with data_tab:
+                        st.dataframe(underlying_df)
 
     def students_communal(self):
         """

@@ -2,8 +2,7 @@ from .worker_distributor import WorkerDistributor, load_sex_per_sector, load_wor
 from .care_home_distributor import CareHomeDistributor
 from .company_distributor import CompanyDistributor
 
-from . import households
-from .households.household_distributor_v2_broad import HouseholdDistributor
+from .residences import ResidenceDistributor
 
 from .hospital_distributor import HospitalDistributor
 from .school_distributor import SchoolDistributor

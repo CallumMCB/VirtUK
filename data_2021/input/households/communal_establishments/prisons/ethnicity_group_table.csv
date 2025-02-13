@@ -1,739 +1,120 @@
-Name,Description,Value
-Altcourse,A Asian / Asian British,36
-Altcourse,B Black / African / Caribbean / Black British,25
-Altcourse,C Mixed / Multiple ethnic groups,33
-Altcourse,D Other ethnic group,*
-Altcourse,E White,1016
-Altcourse,G Not stated,*
-Altcourse,F Not recorded,14
-Ashfield,A Asian / Asian British,25
-Ashfield,B Black / African / Caribbean / Black British,33
-Ashfield,C Mixed / Multiple ethnic groups,9
-Ashfield,D Other ethnic group,4
-Ashfield,E White,322
-Ashfield,G Not stated,4
-Ashfield,F Not recorded,2
-Askham Grange,A Asian / Asian British,*
-Askham Grange,B Black / African / Caribbean / Black British,*
-Askham Grange,C Mixed / Multiple ethnic groups,4
-Askham Grange,E White,74
-Aylesbury,A Asian / Asian British,21
-Aylesbury,B Black / African / Caribbean / Black British,93
-Aylesbury,C Mixed / Multiple ethnic groups,33
-Aylesbury,D Other ethnic group,*
-Aylesbury,E White,96
-Aylesbury,G Not stated,*
-Bedford,A Asian / Asian British,53
-Bedford,B Black / African / Caribbean / Black British,61
-Bedford,C Mixed / Multiple ethnic groups,21
-Bedford,D Other ethnic group,*
-Bedford,E White,210
-Bedford,G Not stated,*
-Bedford,F Not recorded,16
-Belmarsh,A Asian / Asian British,78
-Belmarsh,B Black / African / Caribbean / Black British,220
-Belmarsh,C Mixed / Multiple ethnic groups,68
-Belmarsh,D Other ethnic group,18
-Belmarsh,E White,288
-Belmarsh,G Not stated,*
-Belmarsh,F Not recorded,*
-Berwyn,A Asian / Asian British,70
-Berwyn,B Black / African / Caribbean / Black British,82
-Berwyn,C Mixed / Multiple ethnic groups,43
-Berwyn,D Other ethnic group,6
-Berwyn,E White,1584
-Berwyn,G Not stated,16
-Berwyn,F Not recorded,3
-Birmingham,A Asian / Asian British,168
-Birmingham,B Black / African / Caribbean / Black British,166
-Birmingham,C Mixed / Multiple ethnic groups,61
-Birmingham,D Other ethnic group,19
-Birmingham,E White,546
-Birmingham,G Not stated,7
-Birmingham,F Not recorded,2
-Brinsford,A Asian / Asian British,67
-Brinsford,B Black / African / Caribbean / Black British,83
-Brinsford,C Mixed / Multiple ethnic groups,42
-Brinsford,D Other ethnic group,8
-Brinsford,E White,230
-Brinsford,G Not stated,*
-Brinsford,F Not recorded,*
-Bristol,A Asian / Asian British,28
-Bristol,B Black / African / Caribbean / Black British,60
-Bristol,C Mixed / Multiple ethnic groups,28
-Bristol,D Other ethnic group,*
-Bristol,E White,364
-Bristol,G Not stated,*
-Brixton,A Asian / Asian British,68
-Brixton,B Black / African / Caribbean / Black British,184
-Brixton,C Mixed / Multiple ethnic groups,52
-Brixton,D Other ethnic group,15
-Brixton,E White,340
-Brixton,G Not stated,3
-Brixton,F Not recorded,2
-Bronzefield,A Asian / Asian British,20
-Bronzefield,B Black / African / Caribbean / Black British,77
-Bronzefield,C Mixed / Multiple ethnic groups,41
-Bronzefield,D Other ethnic group,8
-Bronzefield,E White,341
-Bronzefield,F Not recorded,1
-Buckley Hall,A Asian / Asian British,39
-Buckley Hall,B Black / African / Caribbean / Black British,37
-Buckley Hall,C Mixed / Multiple ethnic groups,*
-Buckley Hall,D Other ethnic group,*
-Buckley Hall,E White,353
-Bullingdon,A Asian / Asian British,123
-Bullingdon,B Black / African / Caribbean / Black British,120
-Bullingdon,C Mixed / Multiple ethnic groups,78
-Bullingdon,D Other ethnic group,13
-Bullingdon,E White,730
-Bullingdon,G Not stated,5
-Bure,A Asian / Asian British,28
-Bure,B Black / African / Caribbean / Black British,45
-Bure,C Mixed / Multiple ethnic groups,20
-Bure,D Other ethnic group,11
-Bure,E White,504
-Bure,G Not stated,*
-Bure,F Not recorded,*
-Cardiff,A Asian / Asian British,21
-Cardiff,B Black / African / Caribbean / Black British,32
-Cardiff,C Mixed / Multiple ethnic groups,30
-Cardiff,D Other ethnic group,7
-Cardiff,E White,546
-Cardiff,G Not stated,3
-Cardiff,F Not recorded,7
-Channings Wood,A Asian / Asian British,15
-Channings Wood,B Black / African / Caribbean / Black British,37
-Channings Wood,C Mixed / Multiple ethnic groups,14
-Channings Wood,D Other ethnic group,*
-Channings Wood,E White,608
-Channings Wood,G Not stated,*
-Chelmsford,A Asian / Asian British,26
-Chelmsford,B Black / African / Caribbean / Black British,97
-Chelmsford,C Mixed / Multiple ethnic groups,36
-Chelmsford,D Other ethnic group,*
-Chelmsford,E White,510
-Chelmsford,G Not stated,*
-Chelmsford,F Not recorded,1
-Coldingley,A Asian / Asian British,30
-Coldingley,B Black / African / Caribbean / Black British,124
-Coldingley,C Mixed / Multiple ethnic groups,32
-Coldingley,D Other ethnic group,*
-Coldingley,E White,251
-Coldingley,G Not stated,*
-Cookham Wood,A Asian / Asian British,*
-Cookham Wood,B Black / African / Caribbean / Black British,44
-Cookham Wood,C Mixed / Multiple ethnic groups,8
-Cookham Wood,D Other ethnic group,*
-Cookham Wood,E White,21
-Cookham Wood,G Not stated,7
-Cookham Wood,F Not recorded,1
-Dartmoor,A Asian / Asian British,10
-Dartmoor,B Black / African / Caribbean / Black British,29
-Dartmoor,C Mixed / Multiple ethnic groups,12
-Dartmoor,D Other ethnic group,*
-Dartmoor,E White,557
-Dartmoor,G Not stated,4
-Dartmoor,F Not recorded,*
-Deerbolt,A Asian / Asian British,24
-Deerbolt,B Black / African / Caribbean / Black British,42
-Deerbolt,C Mixed / Multiple ethnic groups,*
-Deerbolt,E White,190
-Deerbolt,G Not stated,*
-Doncaster,A Asian / Asian British,105
-Doncaster,B Black / African / Caribbean / Black British,62
-Doncaster,C Mixed / Multiple ethnic groups,40
-Doncaster,D Other ethnic group,21
-Doncaster,E White,904
-Doncaster,F Not recorded,2
-Dovegate,A Asian / Asian British,121
-Dovegate,B Black / African / Caribbean / Black British,134
-Dovegate,C Mixed / Multiple ethnic groups,79
-Dovegate,D Other ethnic group,24
-Dovegate,E White,798
-Dovegate,F Not recorded,2
-Downview,A Asian / Asian British,13
-Downview,B Black / African / Caribbean / Black British,30
-Downview,C Mixed / Multiple ethnic groups,17
-Downview,E White,155
-Drake Hall,A Asian / Asian British,14
-Drake Hall,B Black / African / Caribbean / Black British,15
-Drake Hall,C Mixed / Multiple ethnic groups,13
-Drake Hall,D Other ethnic group,*
-Drake Hall,E White,222
-Drake Hall,G Not stated,*
-Drake Hall,F Not recorded,*
-Durham,A Asian / Asian British,47
-Durham,B Black / African / Caribbean / Black British,25
-Durham,C Mixed / Multiple ethnic groups,22
-Durham,D Other ethnic group,15
-Durham,E White,832
-East Sutton Park,A Asian / Asian British,*
-East Sutton Park,B Black / African / Caribbean / Black British,8
-East Sutton Park,C Mixed / Multiple ethnic groups,*
-East Sutton Park,E White,61
-Eastwood Park,A Asian / Asian British,5
-Eastwood Park,B Black / African / Caribbean / Black British,18
-Eastwood Park,C Mixed / Multiple ethnic groups,11
-Eastwood Park,D Other ethnic group,3
-Eastwood Park,E White,326
-Eastwood Park,F Not recorded,8
-Elmley (Sheppey cluster),A Asian / Asian British,30
-Elmley (Sheppey cluster),B Black / African / Caribbean / Black British,134
-Elmley (Sheppey cluster),C Mixed / Multiple ethnic groups,42
-Elmley (Sheppey cluster),D Other ethnic group,19
-Elmley (Sheppey cluster),E White,869
-Elmley (Sheppey cluster),G Not stated,*
-Elmley (Sheppey cluster),F Not recorded,*
-Erlestoke,A Asian / Asian British,33
-Erlestoke,B Black / African / Caribbean / Black British,71
-Erlestoke,C Mixed / Multiple ethnic groups,21
-Erlestoke,D Other ethnic group,*
-Erlestoke,E White,301
-Erlestoke,G Not stated,*
-Erlestoke,F Not recorded,1
-Exeter,A Asian / Asian British,9
-Exeter,B Black / African / Caribbean / Black British,35
-Exeter,C Mixed / Multiple ethnic groups,9
-Exeter,D Other ethnic group,3
-Exeter,E White,344
-Exeter,G Not stated,4
-Exeter,F Not recorded,6
-Featherstone,A Asian / Asian British,101
-Featherstone,B Black / African / Caribbean / Black British,97
-Featherstone,C Mixed / Multiple ethnic groups,51
-Featherstone,D Other ethnic group,5
-Featherstone,E White,400
-Featherstone,G Not stated,5
-Featherstone,F Not recorded,1
-Feltham,A Asian / Asian British,18
-Feltham,B Black / African / Caribbean / Black British,86
-Feltham,C Mixed / Multiple ethnic groups,37
-Feltham,D Other ethnic group,*
-Feltham,E White,73
-Feltham,G Not stated,*
-Ford,A Asian / Asian British,39
-Ford,B Black / African / Caribbean / Black British,77
-Ford,C Mixed / Multiple ethnic groups,18
-Ford,D Other ethnic group,*
-Ford,E White,239
-Ford,G Not stated,*
-Ford,F Not recorded,1
-Forest Bank,A Asian / Asian British,146
-Forest Bank,B Black / African / Caribbean / Black British,101
-Forest Bank,C Mixed / Multiple ethnic groups,64
-Forest Bank,D Other ethnic group,19
-Forest Bank,E White,918
-Forest Bank,G Not stated,*
-Forest Bank,F Not recorded,*
-Foston Hall,A Asian / Asian British,10
-Foston Hall,B Black / African / Caribbean / Black British,13
-Foston Hall,C Mixed / Multiple ethnic groups,10
-Foston Hall,E White,220
-Foston Hall,F Not recorded,2
-Frankland,A Asian / Asian British,53
-Frankland,B Black / African / Caribbean / Black British,81
-Frankland,C Mixed / Multiple ethnic groups,21
-Frankland,D Other ethnic group,3
-Frankland,E White,657
-Frankland,G Not stated,3
-Frankland,F Not recorded,1
-Full Sutton,A Asian / Asian British,74
-Full Sutton,B Black / African / Caribbean / Black British,57
-Full Sutton,C Mixed / Multiple ethnic groups,22
-Full Sutton,D Other ethnic group,12
-Full Sutton,E White,402
-Garth,A Asian / Asian British,42
-Garth,B Black / African / Caribbean / Black British,94
-Garth,C Mixed / Multiple ethnic groups,43
-Garth,D Other ethnic group,*
-Garth,E White,602
-Garth,G Not stated,*
-Gartree,A Asian / Asian British,67
-Gartree,B Black / African / Caribbean / Black British,126
-Gartree,C Mixed / Multiple ethnic groups,28
-Gartree,D Other ethnic group,9
-Gartree,E White,362
-Grendon/Spring Hill,A Asian / Asian British,43
-Grendon/Spring Hill,B Black / African / Caribbean / Black British,71
-Grendon/Spring Hill,C Mixed / Multiple ethnic groups,18
-Grendon/Spring Hill,D Other ethnic group,*
-Grendon/Spring Hill,E White,262
-Grendon/Spring Hill,G Not stated,*
-Grendon/Spring Hill,F Not recorded,1
-Guys Marsh,A Asian / Asian British,21
-Guys Marsh,B Black / African / Caribbean / Black British,69
-Guys Marsh,C Mixed / Multiple ethnic groups,32
-Guys Marsh,D Other ethnic group,4
-Guys Marsh,E White,326
-Guys Marsh,G Not stated,4
-Guys Marsh,F Not recorded,3
-Hatfield,A Asian / Asian British,68
-Hatfield,B Black / African / Caribbean / Black British,18
-Hatfield,C Mixed / Multiple ethnic groups,14
-Hatfield,D Other ethnic group,3
-Hatfield,E White,177
-Hatfield,F Not recorded,1
-Haverigg,A Asian / Asian British,16
-Haverigg,B Black / African / Caribbean / Black British,*
-Haverigg,C Mixed / Multiple ethnic groups,15
-Haverigg,D Other ethnic group,*
-Haverigg,E White,264
-Hewell,A Asian / Asian British,65
-Hewell,B Black / African / Caribbean / Black British,78
-Hewell,C Mixed / Multiple ethnic groups,41
-Hewell,D Other ethnic group,10
-Hewell,E White,687
-Hewell,G Not stated,3
-Hewell,F Not recorded,4
-High Down,A Asian / Asian British,96
-High Down,B Black / African / Caribbean / Black British,273
-High Down,C Mixed / Multiple ethnic groups,79
-High Down,D Other ethnic group,19
-High Down,E White,685
-High Down,G Not stated,3
-High Down,F Not recorded,10
-Highpoint (North and South),A Asian / Asian British,117
-Highpoint (North and South),B Black / African / Caribbean / Black British,317
-Highpoint (North and South),C Mixed / Multiple ethnic groups,82
-Highpoint (North and South),D Other ethnic group,29
-Highpoint (North and South),E White,695
-Highpoint (North and South),G Not stated,11
-Highpoint (North and South),F Not recorded,2
-Hindley,A Asian / Asian British,31
-Hindley,B Black / African / Caribbean / Black British,25
-Hindley,C Mixed / Multiple ethnic groups,28
-Hindley,D Other ethnic group,4
-Hindley,E White,462
-Hindley,F Not recorded,1
-Hollesley Bay,A Asian / Asian British,32
-Hollesley Bay,B Black / African / Caribbean / Black British,92
-Hollesley Bay,C Mixed / Multiple ethnic groups,30
-Hollesley Bay,D Other ethnic group,6
-Hollesley Bay,E White,229
-Hollesley Bay,G Not stated,3
-Holme House,A Asian / Asian British,26
-Holme House,B Black / African / Caribbean / Black British,16
-Holme House,C Mixed / Multiple ethnic groups,18
-Holme House,D Other ethnic group,3
-Holme House,E White,1088
-Hull,A Asian / Asian British,45
-Hull,B Black / African / Caribbean / Black British,33
-Hull,C Mixed / Multiple ethnic groups,30
-Hull,D Other ethnic group,9
-Hull,E White,858
-Hull,G Not stated,3
-Hull,F Not recorded,37
-Humber,A Asian / Asian British,40
-Humber,B Black / African / Caribbean / Black British,29
-Humber,C Mixed / Multiple ethnic groups,23
-Humber,D Other ethnic group,*
-Humber,E White,848
-Humber,F Not recorded,*
-Huntercombe,A Asian / Asian British,66
-Huntercombe,B Black / African / Caribbean / Black British,116
-Huntercombe,C Mixed / Multiple ethnic groups,20
-Huntercombe,D Other ethnic group,23
-Huntercombe,E White,203
-Isis,A Asian / Asian British,69
-Isis,B Black / African / Caribbean / Black British,260
-Isis,C Mixed / Multiple ethnic groups,79
-Isis,D Other ethnic group,29
-Isis,E White,154
-Isis,G Not stated,*
-Isis,F Not recorded,*
-Isle of Wight,A Asian / Asian British,50
-Isle of Wight,B Black / African / Caribbean / Black British,74
-Isle of Wight,C Mixed / Multiple ethnic groups,17
-Isle of Wight,D Other ethnic group,6
-Isle of Wight,E White,494
-Isle of Wight,G Not stated,3
-Isle of Wight,F Not recorded,2
-Kirkham,A Asian / Asian British,64
-Kirkham,B Black / African / Caribbean / Black British,34
-Kirkham,C Mixed / Multiple ethnic groups,16
-Kirkham,D Other ethnic group,*
-Kirkham,E White,374
-Kirkham,G Not stated,*
-Kirklevington Grange,A Asian / Asian British,8
-Kirklevington Grange,B Black / African / Caribbean / Black British,*
-Kirklevington Grange,C Mixed / Multiple ethnic groups,*
-Kirklevington Grange,E White,165
-Lancaster Farms,A Asian / Asian British,36
-Lancaster Farms,B Black / African / Caribbean / Black British,10
-Lancaster Farms,C Mixed / Multiple ethnic groups,13
-Lancaster Farms,E White,462
-Lancaster Farms,G Not stated,3
-Leeds,A Asian / Asian British,170
-Leeds,B Black / African / Caribbean / Black British,50
-Leeds,C Mixed / Multiple ethnic groups,34
-Leeds,D Other ethnic group,28
-Leeds,E White,819
-Leeds,G Not stated,*
-Leeds,F Not recorded,*
-Leicester,A Asian / Asian British,39
-Leicester,B Black / African / Caribbean / Black British,31
-Leicester,C Mixed / Multiple ethnic groups,18
-Leicester,D Other ethnic group,*
-Leicester,E White,180
-Leicester,G Not stated,*
-Lewes,A Asian / Asian British,21
-Lewes,B Black / African / Caribbean / Black British,63
-Lewes,C Mixed / Multiple ethnic groups,26
-Lewes,D Other ethnic group,11
-Lewes,E White,412
-Lewes,G Not stated,3
-Leyhill,A Asian / Asian British,12
-Leyhill,B Black / African / Caribbean / Black British,38
-Leyhill,C Mixed / Multiple ethnic groups,20
-Leyhill,D Other ethnic group,*
-Leyhill,E White,380
-Leyhill,G Not stated,*
-Leyhill,F Not recorded,1
-Lincoln,A Asian / Asian British,41
-Lincoln,B Black / African / Caribbean / Black British,48
-Lincoln,C Mixed / Multiple ethnic groups,20
-Lincoln,D Other ethnic group,6
-Lincoln,E White,547
-Lindholme,A Asian / Asian British,144
-Lindholme,B Black / African / Caribbean / Black British,100
-Lindholme,C Mixed / Multiple ethnic groups,56
-Lindholme,D Other ethnic group,3
-Lindholme,E White,608
-Lindholme,F Not recorded,2
-Littlehey,A Asian / Asian British,97
-Littlehey,B Black / African / Caribbean / Black British,122
-Littlehey,C Mixed / Multiple ethnic groups,27
-Littlehey,D Other ethnic group,*
-Littlehey,E White,910
-Littlehey,G Not stated,*
-Liverpool,A Asian / Asian British,42
-Liverpool,B Black / African / Caribbean / Black British,21
-Liverpool,C Mixed / Multiple ethnic groups,10
-Liverpool,D Other ethnic group,10
-Liverpool,E White,718
-Liverpool,G Not stated,3
-Long Lartin,A Asian / Asian British,46
-Long Lartin,B Black / African / Caribbean / Black British,99
-Long Lartin,C Mixed / Multiple ethnic groups,31
-Long Lartin,D Other ethnic group,5
-Long Lartin,E White,307
-Long Lartin,G Not stated,*
-Long Lartin,F Not recorded,*
-Low Newton,A Asian / Asian British,3
-Low Newton,B Black / African / Caribbean / Black British,3
-Low Newton,C Mixed / Multiple ethnic groups,12
-Low Newton,E White,231
-Lowdham Grange,A Asian / Asian British,95
-Lowdham Grange,B Black / African / Caribbean / Black British,166
-Lowdham Grange,C Mixed / Multiple ethnic groups,63
-Lowdham Grange,D Other ethnic group,13
-Lowdham Grange,E White,547
-Lowdham Grange,G Not stated,*
-Lowdham Grange,F Not recorded,*
-Maidstone,A Asian / Asian British,59
-Maidstone,B Black / African / Caribbean / Black British,155
-Maidstone,C Mixed / Multiple ethnic groups,23
-Maidstone,D Other ethnic group,39
-Maidstone,E White,282
-Maidstone,G Not stated,3
-Manchester,A Asian / Asian British,63
-Manchester,B Black / African / Caribbean / Black British,73
-Manchester,C Mixed / Multiple ethnic groups,35
-Manchester,D Other ethnic group,*
-Manchester,E White,451
-Manchester,G Not stated,*
-Moorland,A Asian / Asian British,103
-Moorland,B Black / African / Caribbean / Black British,56
-Moorland,C Mixed / Multiple ethnic groups,35
-Moorland,D Other ethnic group,*
-Moorland,E White,712
-Moorland,G Not stated,*
-Moorland,F Not recorded,1
-Mount,A Asian / Asian British,132
-Mount,B Black / African / Caribbean / Black British,219
-Mount,C Mixed / Multiple ethnic groups,71
-Mount,D Other ethnic group,27
-Mount,E White,565
-Mount,G Not stated,4
-Mount,F Not recorded,10
-New Hall,A Asian / Asian British,17
-New Hall,B Black / African / Caribbean / Black British,*
-New Hall,C Mixed / Multiple ethnic groups,13
-New Hall,D Other ethnic group,*
-New Hall,E White,293
-New Hall,G Not stated,*
-New Hall,F Not recorded,1
-North Sea Camp,A Asian / Asian British,15
-North Sea Camp,B Black / African / Caribbean / Black British,28
-North Sea Camp,C Mixed / Multiple ethnic groups,*
-North Sea Camp,D Other ethnic group,*
-North Sea Camp,E White,256
-North Sea Camp,F Not recorded,1
-Northumberland,A Asian / Asian British,31
-Northumberland,B Black / African / Caribbean / Black British,14
-Northumberland,C Mixed / Multiple ethnic groups,10
-Northumberland,D Other ethnic group,6
-Northumberland,E White,1258
-Northumberland,F Not recorded,1
-Norwich,A Asian / Asian British,14
-Norwich,B Black / African / Caribbean / Black British,49
-Norwich,C Mixed / Multiple ethnic groups,28
-Norwich,D Other ethnic group,*
-Norwich,E White,614
-Norwich,G Not stated,*
-Norwich,F Not recorded,2
-Nottingham,A Asian / Asian British,79
-Nottingham,B Black / African / Caribbean / Black British,105
-Nottingham,C Mixed / Multiple ethnic groups,62
-Nottingham,D Other ethnic group,5
-Nottingham,E White,593
-Nottingham,G Not stated,4
-Nottingham,F Not recorded,1
-Oakwood,A Asian / Asian British,281
-Oakwood,B Black / African / Caribbean / Black British,261
-Oakwood,C Mixed / Multiple ethnic groups,98
-Oakwood,D Other ethnic group,22
-Oakwood,E White,1392
-Oakwood,G Not stated,3
-Oakwood,F Not recorded,1
-Onley,A Asian / Asian British,61
-Onley,B Black / African / Caribbean / Black British,263
-Onley,C Mixed / Multiple ethnic groups,64
-Onley,D Other ethnic group,20
-Onley,E White,301
-Onley,G Not stated,6
-Onley,F Not recorded,6
-Parc,A Asian / Asian British,83
-Parc,B Black / African / Caribbean / Black British,105
-Parc,C Mixed / Multiple ethnic groups,65
-Parc,D Other ethnic group,18
-Parc,E White,1353
-Parc,F Not recorded,1
-Pentonville,A Asian / Asian British,162
-Pentonville,B Black / African / Caribbean / Black British,343
-Pentonville,C Mixed / Multiple ethnic groups,77
-Pentonville,D Other ethnic group,35
-Pentonville,E White,381
-Pentonville,F Not recorded,53
-Peterborough (Female),A Asian / Asian British,11
-Peterborough (Female),B Black / African / Caribbean / Black British,19
-Peterborough (Female),C Mixed / Multiple ethnic groups,16
-Peterborough (Female),D Other ethnic group,7
-Peterborough (Female),E White,263
-Peterborough (Female),F Not recorded,1
-Peterborough (Male),A Asian / Asian British,35
-Peterborough (Male),B Black / African / Caribbean / Black British,97
-Peterborough (Male),C Mixed / Multiple ethnic groups,53
-Peterborough (Male),D Other ethnic group,8
-Peterborough (Male),E White,635
-Peterborough (Male),G Not stated,3
-Peterborough (Male),F Not recorded,2
-Portland,A Asian / Asian British,14
-Portland,B Black / African / Caribbean / Black British,69
-Portland,C Mixed / Multiple ethnic groups,40
-Portland,E White,382
-Prescoed,A Asian / Asian British,14
-Prescoed,B Black / African / Caribbean / Black British,12
-Prescoed,C Mixed / Multiple ethnic groups,12
-Prescoed,E White,197
-Preston,A Asian / Asian British,70
-Preston,B Black / African / Caribbean / Black British,14
-Preston,C Mixed / Multiple ethnic groups,12
-Preston,D Other ethnic group,10
-Preston,E White,569
-Preston,F Not recorded,4
-Ranby,A Asian / Asian British,92
-Ranby,B Black / African / Caribbean / Black British,102
-Ranby,C Mixed / Multiple ethnic groups,73
-Ranby,D Other ethnic group,*
-Ranby,E White,700
-Ranby,G Not stated,*
-Risley,A Asian / Asian British,77
-Risley,B Black / African / Caribbean / Black British,58
-Risley,C Mixed / Multiple ethnic groups,32
-Risley,D Other ethnic group,19
-Risley,E White,747
-Risley,F Not recorded,3
-Rochester,A Asian / Asian British,18
-Rochester,B Black / African / Caribbean / Black British,81
-Rochester,C Mixed / Multiple ethnic groups,29
-Rochester,D Other ethnic group,6
-Rochester,E White,541
-Rochester,G Not stated,3
-Rochester,F Not recorded,2
-Rye Hill,A Asian / Asian British,53
-Rye Hill,B Black / African / Caribbean / Black British,38
-Rye Hill,C Mixed / Multiple ethnic groups,14
-Rye Hill,D Other ethnic group,5
-Rye Hill,E White,502
-Rye Hill,G Not stated,*
-Rye Hill,F Not recorded,*
-Send,A Asian / Asian British,12
-Send,B Black / African / Caribbean / Black British,26
-Send,C Mixed / Multiple ethnic groups,*
-Send,D Other ethnic group,*
-Send,E White,123
-Send,F Not recorded,1
-Stafford,A Asian / Asian British,42
-Stafford,B Black / African / Caribbean / Black British,27
-Stafford,C Mixed / Multiple ethnic groups,*
-Stafford,D Other ethnic group,6
-Stafford,E White,620
-Stafford,G Not stated,*
-Stafford,F Not recorded,9
-Standford Hill (Sheppey cluster),A Asian / Asian British,42
-Standford Hill (Sheppey cluster),B Black / African / Caribbean / Black British,109
-Standford Hill (Sheppey cluster),C Mixed / Multiple ethnic groups,37
-Standford Hill (Sheppey cluster),D Other ethnic group,6
-Standford Hill (Sheppey cluster),E White,260
-Standford Hill (Sheppey cluster),G Not stated,*
-Standford Hill (Sheppey cluster),F Not recorded,*
-Stocken,A Asian / Asian British,99
-Stocken,B Black / African / Caribbean / Black British,168
-Stocken,C Mixed / Multiple ethnic groups,54
-Stocken,D Other ethnic group,14
-Stocken,E White,679
-Stocken,G Not stated,*
-Stocken,F Not recorded,*
-Stoke Heath,A Asian / Asian British,77
-Stoke Heath,B Black / African / Caribbean / Black British,81
-Stoke Heath,C Mixed / Multiple ethnic groups,45
-Stoke Heath,D Other ethnic group,*
-Stoke Heath,E White,494
-Stoke Heath,G Not stated,*
-Styal,A Asian / Asian British,6
-Styal,B Black / African / Caribbean / Black British,*
-Styal,C Mixed / Multiple ethnic groups,18
-Styal,D Other ethnic group,*
-Styal,E White,340
-Styal,G Not stated,*
-Sudbury,A Asian / Asian British,114
-Sudbury,B Black / African / Caribbean / Black British,89
-Sudbury,C Mixed / Multiple ethnic groups,35
-Sudbury,D Other ethnic group,4
-Sudbury,E White,310
-Sudbury,G Not stated,3
-Swaleside (Sheppey cluster),A Asian / Asian British,67
-Swaleside (Sheppey cluster),B Black / African / Caribbean / Black British,260
-Swaleside (Sheppey cluster),C Mixed / Multiple ethnic groups,54
-Swaleside (Sheppey cluster),D Other ethnic group,23
-Swaleside (Sheppey cluster),E White,554
-Swaleside (Sheppey cluster),G Not stated,9
-Swaleside (Sheppey cluster),F Not recorded,4
-Swansea,A Asian / Asian British,7
-Swansea,B Black / African / Caribbean / Black British,10
-Swansea,C Mixed / Multiple ethnic groups,9
-Swansea,D Other ethnic group,9
-Swansea,E White,312
-Swinfen Hall,A Asian / Asian British,68
-Swinfen Hall,B Black / African / Caribbean / Black British,131
-Swinfen Hall,C Mixed / Multiple ethnic groups,58
-Swinfen Hall,D Other ethnic group,*
-Swinfen Hall,E White,284
-Swinfen Hall,G Not stated,*
-Thameside,A Asian / Asian British,122
-Thameside,B Black / African / Caribbean / Black British,413
-Thameside,C Mixed / Multiple ethnic groups,90
-Thameside,D Other ethnic group,123
-Thameside,E White,456
-Thameside,G Not stated,5
-Thorn Cross,A Asian / Asian British,27
-Thorn Cross,B Black / African / Caribbean / Black British,19
-Thorn Cross,C Mixed / Multiple ethnic groups,*
-Thorn Cross,D Other ethnic group,*
-Thorn Cross,E White,270
-Thorn Cross,F Not recorded,1
-Usk,A Asian / Asian British,5
-Usk,B Black / African / Caribbean / Black British,*
-Usk,C Mixed / Multiple ethnic groups,*
-Usk,E White,217
-Usk,G Not stated,*
-Wakefield,A Asian / Asian British,73
-Wakefield,B Black / African / Caribbean / Black British,51
-Wakefield,C Mixed / Multiple ethnic groups,22
-Wakefield,D Other ethnic group,5
-Wakefield,E White,555
-Wakefield,G Not stated,*
-Wakefield,F Not recorded,*
-Wandsworth,A Asian / Asian British,99
-Wandsworth,B Black / African / Caribbean / Black British,279
-Wandsworth,C Mixed / Multiple ethnic groups,104
-Wandsworth,D Other ethnic group,64
-Wandsworth,E White,807
-Wandsworth,G Not stated,*
-Wandsworth,F Not recorded,*
-Warren Hill,A Asian / Asian British,*
-Warren Hill,B Black / African / Caribbean / Black British,20
-Warren Hill,C Mixed / Multiple ethnic groups,11
-Warren Hill,D Other ethnic group,*
-Warren Hill,E White,219
-Wayland,A Asian / Asian British,82
-Wayland,B Black / African / Caribbean / Black British,162
-Wayland,C Mixed / Multiple ethnic groups,54
-Wayland,D Other ethnic group,9
-Wayland,E White,574
-Wayland,G Not stated,3
-Wayland,F Not recorded,5
-Wealstun,A Asian / Asian British,127
-Wealstun,B Black / African / Caribbean / Black British,29
-Wealstun,C Mixed / Multiple ethnic groups,35
-Wealstun,D Other ethnic group,*
-Wealstun,E White,603
-Wealstun,F Not recorded,*
-Werrington,A Asian / Asian British,5
-Werrington,B Black / African / Caribbean / Black British,20
-Werrington,C Mixed / Multiple ethnic groups,19
-Werrington,E White,38
-Wetherby,A Asian / Asian British,8
-Wetherby,B Black / African / Caribbean / Black British,20
-Wetherby,C Mixed / Multiple ethnic groups,14
-Wetherby,D Other ethnic group,5
-Wetherby,E White,100
-Whatton,A Asian / Asian British,44
-Whatton,B Black / African / Caribbean / Black British,52
-Whatton,C Mixed / Multiple ethnic groups,14
-Whatton,D Other ethnic group,*
-Whatton,E White,682
-Whatton,G Not stated,*
-Whatton,F Not recorded,1
-Whitemoor,A Asian / Asian British,31
-Whitemoor,B Black / African / Caribbean / Black British,81
-Whitemoor,C Mixed / Multiple ethnic groups,18
-Whitemoor,D Other ethnic group,*
-Whitemoor,E White,170
-Whitemoor,G Not stated,*
-Whitemoor,F Not recorded,1
-Winchester,A Asian / Asian British,14
-Winchester,B Black / African / Caribbean / Black British,48
-Winchester,C Mixed / Multiple ethnic groups,19
-Winchester,D Other ethnic group,*
-Winchester,E White,371
-Winchester,G Not stated,*
-Winchester,F Not recorded,20
-Woodhill,A Asian / Asian British,43
-Woodhill,B Black / African / Caribbean / Black British,125
-Woodhill,C Mixed / Multiple ethnic groups,43
-Woodhill,D Other ethnic group,*
-Woodhill,E White,284
-Woodhill,G Not stated,*
-Woodhill,F Not recorded,1
-Wormwood Scrubs,A Asian / Asian British,150
-Wormwood Scrubs,B Black / African / Caribbean / Black British,320
-Wormwood Scrubs,C Mixed / Multiple ethnic groups,66
-Wormwood Scrubs,D Other ethnic group,53
-Wormwood Scrubs,E White,464
-Wormwood Scrubs,G Not stated,4
-Wormwood Scrubs,F Not recorded,81
-Wymott,A Asian / Asian British,52
-Wymott,B Black / African / Caribbean / Black British,41
-Wymott,C Mixed / Multiple ethnic groups,24
-Wymott,D Other ethnic group,4
-Wymott,E White,887
-Wymott,G Not stated,3
-zzz The Verne IRC/HMP (Aug 18-),A Asian / Asian British,41
-zzz The Verne IRC/HMP (Aug 18-),B Black / African / Caribbean / Black British,49
-zzz The Verne IRC/HMP (Aug 18-),C Mixed / Multiple ethnic groups,*
-zzz The Verne IRC/HMP (Aug 18-),D Other ethnic group,9
-zzz The Verne IRC/HMP (Aug 18-),E White,455
-zzz The Verne IRC/HMP (Aug 18-),G Not stated,*
+Name,A Asian / Asian British,B Black / African / Caribbean / Black British,C Mixed / Multiple ethnic groups,D Other ethnic group,E White,F Not recorded,G Not stated,area,msoa
+Altcourse,36,25,33,*,1016,14,*,E00176728,E02001351
+Ashfield,25,33,9,4,322,2,4,E00189531,E02003108
+Askham Grange,*,*,4,*,74,*,*,E00067761,E02002782
+Aylesbury,21,93,33,*,96,*,*,E00178390,E02003665
+Bedford,53,61,21,*,210,16,*,E00183502,E02003625
+Belmarsh,78,220,68,18,288,*,*,E00176530,E02000314
+Berwyn,70,82,43,6,1584,3,16,W00010468,W02000425
+Birmingham,168,166,61,19,546,2,7,E00175650,E02001879
+Brinsford,67,83,42,8,230,*,*,E00171615,E02006179
+Bristol,28,60,28,*,364,*,*,E00073274,E02003027
+Brixton,68,184,52,15,340,2,3,E00177601,E02000638
+Bronzefield,20,77,41,8,341,1,*,E00156619,E02006405
+Buckley Hall,39,37,*,*,353,*,*,E00172363,E02001136
+Bullingdon,123,120,78,13,730,*,5,E00169031,E02005936
+Bure,28,45,20,11,504,*,*,E00169872,E02005581
+Cardiff,21,32,30,7,546,7,3,W00009982,W02000402
+Channings Wood,15,37,14,*,608,*,*,E00165900,E02004213
+Chelmsford,26,97,36,*,510,1,*,E00109852,E02006978
+Coldingley,30,124,32,*,251,*,*,E00167820,E02006421
+Cookham Wood,*,44,8,*,21,1,7,E00167420,E02003337
+Dartmoor,10,29,12,*,557,*,4,E00180228,E02004231
+Deerbolt,24,42,*,*,190,*,*,E00183312,E02007022
+Doncaster,105,62,40,21,904,2,*,E00038161,E02001560
+Dovegate,121,134,79,24,798,2,*,E00168365,E02006136
+Downview,13,30,17,*,155,*,*,E00170403,E02006376
+Drake Hall,14,15,13,*,222,*,*,E00151321,E02006192
+Durham,47,25,22,15,832,*,*,E00171869,E02004314
+East Sutton Park,*,8,*,*,61,*,*,E00123682,E02005084
+Eastwood Park,5,18,11,3,326,8,*,E00075710,E02003090
+Elmley (Sheppey cluster),30,134,42,19,869,*,*,E00189650,E02005120
+Erlestoke,33,71,21,*,301,1,*,E00184186,E02006639
+Exeter,9,35,9,3,344,6,4,E00180166,E02004152
+Featherstone,101,97,51,5,400,1,5,E00171615,E02006179
+Feltham,18,86,37,*,73,*,*,E00179152,E02000552
+Ford,39,77,18,*,239,1,*,E00184735,E02006547
+Forest Bank,146,101,64,19,918,*,*,E00172963,E02001164
+Foston Hall,10,13,10,*,220,2,*,E00100526,E02004118
+Frankland,53,81,21,3,657,1,3,E00183299,E02004308
+Full Sutton,74,57,22,12,402,*,*,E00175339,E02002692
+Garth,42,94,43,*,602,*,*,E00170510,E02005195
+Gartree,67,126,28,9,362,*,*,E00187479,E02005373
+Grendon/Spring Hill,43,71,18,*,262,1,*,E00169125,E02003661
+Guys Marsh,21,69,32,4,326,3,4,E00183057,E02004259
+Hatfield,68,18,14,3,177,1,*,E00038290,E02001546
+Haverigg,16,*,15,*,264,*,*,E00097466,E02004007
+Hewell,65,78,41,10,687,4,3,E00181370,E02006709
+High Down,96,273,79,19,685,10,3,E00170403,E02006376
+Highpoint (North and South),117,317,82,29,695,2,11,E00169948,E02006283
+Hindley,31,25,28,4,462,1,*,E00181441,E02001312
+Hollesley Bay,32,92,30,6,229,*,3,E00173886,E02006293
+Holme House,26,16,18,3,1088,*,*,E00174165,E02002544
+Hull,45,33,30,9,858,37,3,E00170747,E02002671
+Humber,40,29,23,*,848,*,*,E00185508,E02002709
+Huntercombe,66,116,20,23,203,*,*,E00186049,E02005968
+Isis,69,260,79,29,154,*,*,E00176530,E02000314
+Isle of Wight,50,74,17,6,494,2,3,E00172713,E02003588
+Kirkham,64,34,16,*,374,*,*,E00174064,E02005205
+Kirklevington Grange,8,*,*,*,165,*,*,E00174174,E02002558
+Lancaster Farms,36,10,13,*,462,*,3,E00185618,E02005233
+Leeds,170,50,34,28,819,*,*,E00170041,E02002400
+Leicester,39,31,18,*,180,*,*,E00068911,E02006850
+Lewes,21,63,26,11,412,*,3,E00106857,E02004383
+Leyhill,12,38,20,*,380,1,*,E00173069,E02003092
+Lincoln,41,48,20,6,547,*,*,E00173653,E02005444
+Lindholme,144,100,56,3,608,2,*,E00172382,E02001546
+Littlehey,97,122,27,*,910,*,*,E00173794,E02003769
+Liverpool,42,21,10,10,718,*,3,E00182973,E02001349
+Long Lartin,46,99,31,5,307,*,*,E00171600,E02006758
+Low Newton,3,3,12,*,231,*,*,E00183266,E02004308
+Lowdham Grange,95,166,63,13,547,*,*,E00173435,E02005905
+Maidstone,59,155,23,39,282,*,3,E00186663,E02005071
+Manchester,63,73,35,*,451,*,*,E00175942,E02006915
+Moorland,103,56,35,*,712,1,*,E00172382,E02001546
+Mount,132,219,71,27,565,10,4,E00189378,E02004876
+New Hall,17,*,13,*,293,1,*,E00168748,E02002472
+North Sea Camp,15,28,*,*,256,1,*,E00185354,E02005417
+Northumberland,31,14,10,6,1258,1,*,E00190044,E02005720
+Norwich,14,49,28,*,614,2,*,E00187940,E02005587
+Nottingham,79,105,62,5,593,1,4,E00173486,E02002874
+Oakwood,281,261,98,22,1392,1,3,E00171615,E02006179
+Onley,61,263,64,20,301,6,6,E00169204,E02005621
+Parc,83,105,65,18,1353,1,*,W00010385,W02000228
+Pentonville,162,343,77,35,381,53,*,E00013494,E02000568
+Peterborough (Female),11,19,16,7,263,1,*,E00187639,E02003246
+Peterborough (Male),35,97,53,8,635,2,3,E00187639,E02003246
+Portland,14,69,40,*,382,*,*,E00171471,E02004288
+Prescoed,14,12,12,*,197,*,*,W00008311,W02000341
+Preston,70,14,12,10,569,4,*,E00181968,E02005266
+Ranby,92,102,73,*,700,*,*,E00142851,E02005837
+Risley,77,58,32,19,747,3,*,E00188925,E02002590
+Rochester,18,81,29,6,541,2,3,E00167420,E02003337
+Rye Hill,53,38,14,5,502,*,*,E00169203,E02005621
+Send,12,26,*,*,123,1,*,E00155365,E02006344
+Stafford,42,27,*,6,620,9,*,E00179354,E02006196
+Standford Hill (Sheppey cluster),42,109,37,6,260,*,*,E00124937,E02005120
+Stocken,99,168,54,14,679,*,*,E00172628,E02002863
+Stoke Heath,77,81,45,*,494,*,*,E00187256,E02006020
+Styal,6,*,18,*,340,*,*,E00174371,E02003859
+Sudbury,114,89,35,4,310,*,3,E00174335,E02004077
+Swaleside (Sheppey cluster),67,260,54,23,554,4,9,E00124937,E02005120
+Swansea,7,10,9,9,312,*,*,W00003997,W02000192
+Swinfen Hall,68,131,58,*,284,*,*,E00180753,E02006157
+Thameside,122,413,90,123,456,*,5,E00008406,E02000314
+Thorn Cross,27,19,*,*,270,1,*,E00062779,E02002613
+Usk,5,*,*,*,217,*,*,W00008311,W02000341
+Wakefield,73,51,22,5,555,*,*,E00179981,E02002456
+Wandsworth,99,279,104,64,807,*,*,E00183128,E02000946
+Warren Hill,*,20,11,*,219,*,*,E00173886,E02006293
+Wayland,82,162,54,9,574,5,3,E00169902,E02005512
+Wealstun,127,29,35,*,603,*,*,E00170593,E02002331
+Werrington,5,20,19,*,38,*,*,E00151745,E02006212
+Wetherby,8,20,14,5,100,*,*,E00059025,E02002331
+Whatton,44,52,14,*,682,1,*,E00144559,E02005906
+Whitemoor,31,81,18,*,170,1,*,E00187623,E02003746
+Winchester,14,48,19,*,371,20,*,E00184857,E02004833
+Woodhill,43,125,43,*,284,1,*,E00183648,E02007016
+Wormwood Scrubs,150,320,66,53,464,81,4,E00183098,E02000372
+Wymott,52,41,24,4,887,*,3,E00170510,E02005195
+zzz The Verne IRC/HMP (Aug 18-),41,49,*,9,455,*,*,E00171474,E02004288

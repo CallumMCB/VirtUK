@@ -2,6 +2,7 @@ import streamlit as st
 
 from data_loader import DataLoader, DataFilter
 from map_plotter import get_map
+from lad_plotter import get_LAD_map
 from msoa_plotter import get_msoa_map
 
 @st.cache_data(show_spinner=True)
@@ -16,5 +17,8 @@ def load_all_data(unique_regions, regions):
 def create_map(data_loader, layer_options, center, zoom):
     return get_map(data_loader, layer_options, center, zoom)
 
-def create_sub_map(data_loader, layer_options, center, zoom, region, msoa):
-    return get_msoa_map(data_loader, layer_options, center, zoom, region, msoa)
+def create_lad_map(data_loader, layer_options, center, zoom, region, lad):
+    return get_LAD_map(data_loader, layer_options, center, zoom, region, lad)
+
+def create_msoa_map(data_loader, layer_options, center, zoom, region, lad, msoa):
+    return get_msoa_map(data_loader, layer_options, center, zoom, region, lad, msoa)

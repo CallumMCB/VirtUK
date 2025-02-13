@@ -11,35 +11,13 @@ from VirtUK.groups.travel import Travel
 from VirtUK.world import generate_world_from_geography
 import time
 
-# load london super areas
-# london_areas = os.path.join(os.path.dirname(__file__), "london_areas.txt")
-durham_areas = ['E02004313', 'E02004314', 'E02004315']
-# warwick_areas = ['E02006525', 'E02006528', 'E02006530']
-# cambridge_example = ['E02003723', 'E02003720']
-# # # add King's cross area for station
-# if "E00004734" not in london_areas:
-#     london_areas = np.append(london_areas, "E02000187")
-#
-# # add some people commuting from Cambridge
-# london_areas = np.concatenate((london_areas, ["E02003719", "E02003720", "E02003721"]))
-#
-# add Bath as well to have a city with no stations
-# london_areas = np.concatenate(
-#     (london_areas, ["E02002988", "E02002989", "E02002990", "E02002991", "E02002992"])
-# )
-
 t1 = time.time()
 
 # default config
 config_path = "./config_simulation.yaml"
 
 # define geography, let's run the first 20 super areas of london
-# geography = Geography.from_file({"lad": ["Northumberland"]})
-# geography = Geography.from_file({"msoa": london_areas})
-# geography = Geography.from_file({"msoa": cambridge_example})
-geography = Geography.from_file({"msoa": durham_areas})
-# geography = Geography.from_file({"msoa": warwick_areas})
-# geography = Geography.from_file({"region": ["North East"]})
+geography = Geography.from_file({"lad": ['County Durham']})
 
 '''
 # add buildings
@@ -47,9 +25,9 @@ geography.companies = Companies.for_geography(geography)
 geography.schools = Schools.for_geography(geography)
 geography.universities = Universities.for_geography(geography)
 geography.care_homes = CareHomes.for_geography(geography)
-# generate world
+# generate worldf
 '''
-world = generate_world_from_geography(geography, include_households=True)
+world = generate_world_from_geography(geography, include_residences=True)
 
 # some leisure activities
 world.pubs = Pubs.for_geography(geography)

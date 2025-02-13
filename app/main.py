@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import re
 from streamlit_folium import st_folium
-from caching_helpers import load_all_data, create_map, create_sub_map
+from caching_helpers import load_all_data, create_map, create_lad_map, create_msoa_map
 from pprint import pprint
 from outputs import MSOAOutput, OAOutput, CareOutput
 
@@ -15,9 +15,10 @@ class Main:
         self.start_center = [54.5, -2.5]
         self.start_zoom = 6
         self.regions_file = os.path.join(DATA_PATH, 'input/geography/oa_msoa_lad_regions.csv')
-        print(self.regions_file)
+        self.lad_lookup = os.path.join(DATA_PATH, 'input/geography/lad_lookup.csv')
         self.selected_oa_code = None
         self.selected_msoa_code = None
+        self.selected_LAD_code = None
         self.selected_region_name = None
         self.main()
 
@@ -32,15 +33,14 @@ class Main:
         unique_regions = []  # Default empty list
         selected_regions = []  # Default empty list
 
-        if os.path.exists(self.regions_file):
-            df_regions = pd.read_csv(self.regions_file)
-            unique_regions = df_regions['region'].dropna().unique().tolist()
-            unique_regions = [region for region in unique_regions if region != 'Wales']
-            selected_regions = st.sidebar.multiselect("Select Regions", options=unique_regions, default=['North East'])
-            regions = selected_regions if selected_regions else None
-        else:
-            st.write(self.regions_file, "not found.")
-            regions = None  # Ensure `regions` is also always defined
+        df_regions = pd.read_csv(self.regions_file)
+        unique_regions = df_regions['region'].dropna().unique().tolist()
+        unique_regions = [region for region in unique_regions if region != 'Wales']
+        selected_regions = st.sidebar.multiselect("Select Regions", options=unique_regions, default=['North East'])
+        regions = selected_regions if selected_regions else None
+
+        df_lad_lookup = pd.read_csv(self.lad_lookup)
+        df_lad_lookup.set_index('lad_code', inplace=True)
 
         # --- Load and Process Data (cached) ---
         data_loader = load_all_data(unique_regions, regions)
@@ -50,20 +50,14 @@ class Main:
             "hospitals": st.sidebar.checkbox("Show Hospitals", value=False),
             "hospices": st.sidebar.checkbox("Show Hospices", value=False),
             "trusts": st.sidebar.checkbox("Show NHS Trusts", value=False),
-            "care_homes": st.sidebar.checkbox("Show Care Homes", value=True),
+            "care_homes": st.sidebar.checkbox("Show Care Homes", value=False),
         }
         st.sidebar.subheader("Boundary Layers")
-        boundary_options = {
-            "msoa_boundaries": st.sidebar.checkbox("Show MSOA Boundaries", value=True),
-            "lad_boundaries": st.sidebar.checkbox("Show LAD Boundaries", value=False),
-        }
-        layer_options = {**feature_options, **boundary_options}
 
         if "sidebar_config" not in st.session_state:
             st.session_state.sidebar_config = {
                 "selected_regions": selected_regions,
                 "feature_options": feature_options,
-                "boundary_options": boundary_options,
             }
 
         if 'map_center' not in st.session_state:
@@ -80,66 +74,58 @@ class Main:
         self.oa_op = OAOutput(self, data_loader)  # Make sure OAOutput is defined!
         self.care_op = CareOutput(self)
 
-        # --- Layout: Two Columns (Map & Details) ---
-        self.col1, self.col2 = st.columns([3, 2])
-        with self.col1:
-            st.subheader("Map")
+        # --- Create Main Map ---
+        self.mainmp, self.maininfo = st.columns([3, 2])
+        with self.mainmp:
+            st.subheader("Map of Selected Regions")
             main_map_data = st_folium(
-                create_map(data_loader, layer_options, self.start_center, self.start_zoom),
+                create_map(data_loader, feature_options, self.start_center, self.start_zoom),
                 width=700,
                 height=450
             )
             pprint(main_map_data)
 
-        # --- Process Clicks from the Main Map ---
-        if main_map_data.get("last_object_clicked"):
-            clicked = main_map_data["last_object_clicked"]
+        self.selected_LAD_code = self.extract_map_data(main_map_data, rf'[EW]0[6789]')
 
-        if main_map_data.get("last_active_drawing"):
-            clicked_area = main_map_data["last_active_drawing"]
-            if "properties" in clicked_area:
-                st.session_state.last_area_clicked = clicked_area["properties"]
-                print("Clicked area from main map:", clicked_area)
+        # --- Layout: Two Columns (Map & Details) ---
+        self.submpcol1, self.submpcol2 = st.columns([3, 2])
+        if self.selected_LAD_code:
+            with self.submpcol1:
+                st.subheader(f"Map of {df_lad_lookup.loc[self.selected_LAD_code, 'lad']}")
+                lad_map_data = st_folium(
+                    create_lad_map(
+                        data_loader,
+                        feature_options,
+                        self.start_center,
+                        self.start_zoom,
+                        self.selected_region_name,
+                        self.selected_LAD_code
+                    ),
+                    width=700,
+                    height=450
+                )
+                pprint(lad_map_data)
 
-        # Extract MSOA code and region name from the tooltip text.
-        if main_map_data.get("last_object_clicked_tooltip"):
-            text = main_map_data["last_object_clicked_tooltip"]
-            # Extract the MSOA code using regex (e.g. "E02xxxxx")
-            msoa_match = re.search(r"E02\d+", text)
-            if msoa_match:
-                self.selected_msoa_code = msoa_match.group()
-            else:
-                self.selected_msoa_code = None
-            # Extract the region name as the first non-empty line.
-            lines = [line.strip() for line in text.split("\n") if line.strip()]
-            self.selected_region_name = lines[0] if lines else None
-
+                self.selected_msoa_code = self.extract_map_data(lad_map_data, r'[EW]02')
+                print(self.selected_msoa_code)
         # --- Display Sub-Map (MSOA Individual Map) in Column 2 ---
         if self.selected_msoa_code:
-            with self.col2:
+            with self.submpcol2:
                 st.subheader("MSOA Individual Map")
-                msoa_map = create_sub_map(
+                msoa_map_data = st_folium(
+                    create_msoa_map(
                     data_loader,
-                    layer_options,
+                    feature_options,
                     self.start_center,
                     self.start_zoom,
                     self.selected_region_name,
+                    self.selected_LAD_code,
                     self.selected_msoa_code
-                )
-                sub_map_data = st_folium(msoa_map, width=700, height=450)
-                pprint(sub_map_data)
-                if sub_map_data.get("last_object_clicked"):
-                    sub_clicked = sub_map_data["last_object_clicked"]
-                    print("Clicked point on sub-map:", sub_clicked)
-                if sub_map_data.get("last_active_drawing"):
-                    sub_clicked_area = sub_map_data["last_active_drawing"]
-                    if "properties" in sub_clicked_area:
-                        st.session_state.last_area_clicked_sub = sub_clicked_area["properties"]
-                        print("Clicked area on sub-map:", sub_clicked_area)
-                if sub_map_data.get("last_object_clicked_tooltip"):
-                    sub_tooltip = sub_map_data["last_object_clicked_tooltip"]
-                    self.selected_oa_code = sub_tooltip.strip()
-                    print("Sub-map tooltip:", self.selected_oa_code, self.selected_region_name)
+                ), width=700, height=450)
+                pprint(msoa_map_data)
+
+                self.selected_oa_code = self.extract_map_data(msoa_map_data, r'[EW]00')
+                print(self.selected_oa_code)
 
         # --- Display Output Information in Columns ---
         msoa_oa_selector = st.popover("Select Area Information")
@@ -172,6 +158,22 @@ class Main:
                 st.write("OA Not Selected or not available")
         else:
             st.write("No area selected")
+
+    def extract_map_data(self, map_data, area_code_segment):
+        # Extract MSOA code and region name from the tooltip text.
+        if map_data.get("last_object_clicked_tooltip"):
+            text = map_data["last_object_clicked_tooltip"]
+
+            lines = [line.strip() for line in text.split("\n") if line.strip()]
+            self.selected_region_name = lines[0] if lines else None
+
+            area_match = re.search(rf"{area_code_segment}\d+", text)
+            print(area_match)
+            if area_match:
+                return area_match.group()
+            else:
+                return None
+
 
 if __name__ == "__main__":
     Main()

@@ -180,10 +180,7 @@ class DataLoader:
                 self.df_hospices[region] = self.drop_missing_coordinates(
                     self.df_hospices.get(region, pd.DataFrame()), ['latitude', 'longitude']
                 )
-                # self.df_trusts[region] = self.drop_missing_coordinates(
-                #     self.df_trusts.get(region, pd.DataFrame()), ['latitude', 'longitude']
-                # )        else:
-            # If not using regional data, check if variables are dictionaries or DataFrames.
+
             if isinstance(self.df_care_homes, pd.DataFrame):
                 self.df_care_homes = self.drop_missing_coordinates(
                     self.df_care_homes, ['Location Latitude', 'Location Longitude']
@@ -196,10 +193,6 @@ class DataLoader:
                 self.df_hospices = self.drop_missing_coordinates(
                     self.df_hospices, ['latitude', 'longitude']
                 )
-            # if isinstance(self.df_trusts, pd.DataFrame):
-            #     self.df_trusts = self.drop_missing_coordinates(
-            #         self.df_trusts, ['latitude', 'longitude']
-            #     )
 
     @staticmethod
     def drop_missing_coordinates(df, coordinate_columns):
