@@ -24,6 +24,7 @@ class LADPlotter:
         self.cloc = CareLocations(self)
         self.selected_region = selected_region
         self.selected_LAD = selected_LAD
+        self.selected_LAD_name = selected_LAD_name
         self.create_map()
 
     def create_map(self):
@@ -54,7 +55,7 @@ class LADPlotter:
                            leave=False):
             properties = {
                 "Region": self.selected_region,
-                "LAD": self.df_lad_lookup.loc[self.selected_LAD_code, 'lad'],
+                "LAD": self.selected_LAD_name,
                 "MSOA": row["MSOA21CD"],
             }
             feature = {
