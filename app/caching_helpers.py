@@ -17,8 +17,8 @@ def load_all_data(unique_regions, regions):
 def create_map(data_loader, layer_options, center, zoom):
     return get_map(data_loader, layer_options, center, zoom)
 
-def create_lad_map(data_loader, layer_options, center, zoom, region, lad):
-    return get_LAD_map(data_loader, layer_options, center, zoom, region, lad)
+def create_lad_map(data_loader, layer_options, center, zoom, region, lad, lad_name):
+    return get_LAD_map(data_loader, layer_options, center, zoom, region, lad, lad_name)
 
 def create_msoa_map(data_loader, layer_options, center, zoom, region, lad, msoa):
     return get_msoa_map(data_loader, layer_options, center, zoom, region, lad, msoa)

@@ -6,7 +6,7 @@ from object_identifiers import CareLocations
 import streamlit as st
 
 class LADPlotter:
-    def __init__(self, data_loader, layer_options=None, center=None, zoom=None, selected_region=None, selected_LAD=None):
+    def __init__(self, data_loader, layer_options=None, center=None, zoom=None, selected_region=None, selected_LAD=None, selected_LAD_name=None):
         """
         If selected_msoa (and selected_region) are provided, the map will only show the selected MSOA
         boundary and its output area (OA) boundaries.
@@ -54,7 +54,7 @@ class LADPlotter:
                            leave=False):
             properties = {
                 "Region": self.selected_region,
-                "LAD": self.selected_LAD,
+                "LAD": self.df_lad_lookup.loc[self.selected_LAD_code, 'lad'],
                 "MSOA": row["MSOA21CD"],
             }
             feature = {
@@ -94,7 +94,7 @@ class LADPlotter:
             content += f"<div><strong>{key}:</strong> {value}</div>"
         return content
 
-def get_LAD_map(data_loader, layer_options, center, zoom, selected_region=None, selected_LAD=None):
+def get_LAD_map(data_loader, layer_options, center, zoom, selected_region=None, selected_LAD=None, selected_LAD_name=None):
     mp = LADPlotter(data_loader, layer_options=layer_options, center=center, zoom=zoom,
-                      selected_region=selected_region, selected_LAD=selected_LAD)
+                      selected_region=selected_region, selected_LAD=selected_LAD, selected_LAD_name=selected_LAD_name)
     return mp.map
